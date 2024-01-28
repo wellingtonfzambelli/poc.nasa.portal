@@ -7,6 +7,23 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
 
+IConfiguration _configuration = null;
+string _path = null;
+
+builder.Host.ConfigureAppConfiguration((hostingContext, configurationBuilder) =>
+{
+    var env = hostingContext.HostingEnvironment;
+
+    configurationBuilder.SetBasePath(env.ContentRootPath);
+    _path = env.ContentRootPath;
+
+    configurationBuilder
+        .AddEnvironmentVariables()
+        .AddCommandLine(Environment.GetCommandLineArgs());
+
+    _configuration = configurationBuilder.Build();
+});
+
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
     .MinimumLevel.Information()
@@ -15,10 +32,10 @@ builder.Host.UseSerilog((context, configuration) =>
     .Enrich.FromLogContext()
     .WriteTo.Console()
     .WriteTo.File(
-        path: "C:\\Projetos\\poc.nasa.portal\\src\\Poc.Nasa.Portal.Api\\logs\\log.txt",
+        path: $"{_path}\\logs\\log.txt",
         outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}")
     .WriteTo.MySQL(
-        "server=127.0.0.1;User Id=root;password=root;Persist Security Info=True;database=loterias;",
+        _configuration.GetValue<string>("CONNECTIONSTRING"),
         "EventLog")
     );
 

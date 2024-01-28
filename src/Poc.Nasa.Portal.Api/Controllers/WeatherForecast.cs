@@ -1,4 +1,4 @@
-namespace Poc.Nasa.Portal.Api
+namespace Poc.Nasa.Portal.Api.Controllers
 {
     public class WeatherForecast
     {

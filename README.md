@@ -5,6 +5,7 @@ Healhcheck
 Swagger
 Mediatr
 Memcache
+action filters
 Serilog
 	ok - mysql
 	ok - file

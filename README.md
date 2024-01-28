@@ -6,6 +6,10 @@ Swagger
 Mediatr
 Memcache
 Serilog
+	ok - mysql
+	ok - file
+	ok - console
+	elastic
 Kibana
 RabbitMQ
 Identity

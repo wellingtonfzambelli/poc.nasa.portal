@@ -1,7 +1,6 @@
 using Poc.Nasa.Portal.Api.Filters;
 using Serilog;
 using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -9,49 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
 
 builder.Host.UseSerilog((context, configuration) =>
-    configuration.ReadFrom.Configuration(context.Configuration));
-
-//var logger = new LoggerConfiguration()
-//    .WriteTo.Console(
-//        restrictedToMinimumLevel: LogEventLevel.Information,
-//        theme: AnsiConsoleTheme.Code)
-//    .CreateLogger();
-
-//var logger = new LoggerConfiguration()
-//    .ReadFrom.Configuration(builder.Configuration)
-//    .Enrich.FromLogContext()
-//    .WriteTo.MySQL("server=127.0.0.1;User Id=root;password=root;Persist Security Info=True;database=loterias;", "EventLog")
-//    .CreateLogger();
-//builder.Logging.ClearProviders();
-//builder.Logging.AddSerilog(logger);
-
-
-
-//var logger = new LoggerConfiguration()
-//    .ReadFrom.Configuration(builder.Configuration)
-//    .MinimumLevel.Information()
-//    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-//    .MinimumLevel.Override("System", LogEventLevel.Information)
-//    .Enrich.FromLogContext()
-//    .WriteTo.Console()
-//    .WriteTo.MySQL(
-//        "server=127.0.0.1;User Id=root;password=root;Persist Security Info=True;database=loterias;",
-//        "EventLog")
-//    .CreateLogger();
-
-
-
-
-//builder.Host.UseSerilog((context, configuration) =>
-//    configuration
-//    .Enrich.FromLogContext()
-//    .Enrich.
-//    .MinimumLevel.Information()
-//    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-//    .MinimumLevel.Override("System", LogEventLevel.Information)
-
-//    .WriteTo.Console()
-//    .WriteTo.MySQL("server=127.0.0.1;User Id=root;password=root;Persist Security Info=True;database=loterias;", "EventLog"));
+    configuration.ReadFrom.Configuration(context.Configuration)
+    .MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+    .MinimumLevel.Override("System", LogEventLevel.Error)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File(
+        path: "C:\\Projetos\\poc.nasa.portal\\src\\Poc.Nasa.Portal.Api\\logs\\log.txt",
+        outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}")
+    .WriteTo.MySQL(
+        "server=127.0.0.1;User Id=root;password=root;Persist Security Info=True;database=loterias;",
+        "EventLog")
+    );
 
 // Add services to the container.
 builder.Services.AddControllers(config =>

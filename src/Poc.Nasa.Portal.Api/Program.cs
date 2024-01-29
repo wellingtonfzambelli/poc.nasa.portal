@@ -1,5 +1,10 @@
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Poc.Nasa.Portal.Api.EF;
+using Poc.Nasa.Portal.Api.Extensions;
 using Poc.Nasa.Portal.Api.Filters;
 using Serilog;
 using Serilog.Events;
@@ -45,6 +50,10 @@ string connection = _configuration.GetValue<string>("CONNECTIONSTRING");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
 builder.Services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));
 
+// HC
+builder.Services.AddHealthChecks()
+    .AddHealthCheckMySql(builder.Configuration["CONNECTIONSTRING"], name: "MySQL");
+
 // Add services to the container.
 builder.Services.AddControllers(config =>
 {
@@ -67,4 +76,36 @@ app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+// HealthCheck
+app.UseHealthChecks("/nasa/v1/health/live", new HealthCheckOptions()
+{
+    Predicate = _ => true,
+    ResponseWriter = WriteResponse
+});
+app.UseHealthChecks("/nasa/v1/health/ready", new HealthCheckOptions()
+{
+    ResponseWriter = (httpContext, result) =>
+    {
+        httpContext.Response.ContentType = "application/json";
+
+        var json = new JObject(
+            new JProperty("status", result.Status.ToString()),
+            new JProperty("results", new JObject(result.Entries.Select(pair =>
+                new JProperty(pair.Key, new JObject(
+                    new JProperty("status", pair.Value.Status.ToString()),
+                    new JProperty("description", pair.Value.Description),
+                    new JProperty("data", new JObject(pair.Value.Data.Select(
+                        p => new JProperty(p.Key, p.Value))))))))));
+
+        return httpContext.Response.WriteAsync(json.ToString(Formatting.Indented));
+    }
+});
+
+static Task WriteResponse(HttpContext httpContext, HealthReport result)
+{
+    httpContext.Response.ContentType = "text/plan";
+    return httpContext.Response.WriteAsync(result.Status.ToString());
+}
+
 app.Run();

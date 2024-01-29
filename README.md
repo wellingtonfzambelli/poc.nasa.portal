@@ -1,7 +1,7 @@
 # poc.nasa.portal
 
 Healhcheck
-	mysql
+	ok - mysql
 Swagger
 Mediatr
 Memcache

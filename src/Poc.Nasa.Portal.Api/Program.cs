@@ -40,6 +40,7 @@ builder.Host.UseSerilog((context, configuration) =>
     .WriteTo.Console()
     .WriteTo.File(
         path: $"{_path}\\logs\\log.txt",
+        rollingInterval: RollingInterval.Day,
         outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}")
     .WriteTo.MySQL(
         _configuration.GetValue<string>("CONNECTIONSTRING"),

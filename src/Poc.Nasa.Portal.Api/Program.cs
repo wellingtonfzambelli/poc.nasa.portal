@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Poc.Nasa.Portal.Api.EF;
 using Poc.Nasa.Portal.Api.Filters;
 using Serilog;
 using Serilog.Events;
@@ -38,6 +40,10 @@ builder.Host.UseSerilog((context, configuration) =>
         _configuration.GetValue<string>("CONNECTIONSTRING"),
         "EventLog")
     );
+
+string connection = _configuration.GetValue<string>("CONNECTIONSTRING");
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
+builder.Services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));
 
 // Add services to the container.
 builder.Services.AddControllers(config =>

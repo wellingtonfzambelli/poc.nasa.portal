@@ -1,0 +1,34 @@
+﻿version: '3.4'
+
+services:
+  nasa.api:
+    image: ${DOCKER_REGISTRY-}pocnasaportalapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+  
+  nasa.mysql:
+    image: mysql
+    container_name: nasa.mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: nasaportal
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - 30001:3306
+    expose:
+      - 30001
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - nasa-networks
+
+networks:
+  nasa-networks:
+
+volumes:
+  my-db:
+    driver: local

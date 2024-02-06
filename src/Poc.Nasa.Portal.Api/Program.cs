@@ -44,11 +44,10 @@ builder.Host.UseSerilog((context, configuration) =>
         rollingInterval: RollingInterval.Day,
         outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}")
     .WriteTo.MySQL(
-        _configuration.GetValue<string>("CONNECTIONSTRING"),
-        "EventLog")
-    );
+        _configuration.ConnectionString(),
+    "EventLog"));
 
-string connection = _configuration.GetValue<string>("CONNECTIONSTRING");
+string connection = _configuration.ConnectionString();
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
 builder.Services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));
 

@@ -17,7 +17,6 @@ public sealed class GCInfoHealthCheck : IHealthCheck
             var options = _options.Get(context.Registration.Name);
             // This example will report degraded status if the application is using
             // more than the configured amount of memory (1gb by default).
-            //
             // Additionally we include some GC info in the reported diagnostics.
             var allocatedByte = GC.GetTotalMemory(forceFullCollection: false);
             var allocatedMb = (GC.GetTotalMemory(forceFullCollection: false) / 1024f) / 1024f;
@@ -32,7 +31,6 @@ public sealed class GCInfoHealthCheck : IHealthCheck
                     };
 
             // Report failure if the allocated memory is >= the threshold.
-            //
             // Using context.Registration.FailureStatus means that the application developer can configure
             // how they want failures to appear.
             var result = allocatedByte >= options.Threshold ? context.Registration.FailureStatus : HealthStatus.Healthy;

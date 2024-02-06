@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
-namespace Poc.Nasa.Portal.Api.EF;
+namespace Poc.Nasa.Portal.Infrastructure.Configurations;
 
 public sealed class NasaPortalContext : DbContext
 {

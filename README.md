@@ -4,6 +4,7 @@
 
 Healhcheck
 	ok - mysql
+	ok - memory
 Docker
 	ok - Mysql
 	Rabbit

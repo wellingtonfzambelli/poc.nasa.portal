@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Poc.Nasa.Portal.App\Poc.Nasa.Portal.App.csproj" />
+    <ProjectReference Include="..\Poc.Nasa.Portal.Infrastructure\Poc.Nasa.Portal.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

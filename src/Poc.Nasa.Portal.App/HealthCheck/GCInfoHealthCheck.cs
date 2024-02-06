@@ -9,7 +9,7 @@ public sealed class GCInfoHealthCheck : IHealthCheck
 
     public GCInfoHealthCheck(IOptionsMonitor<GCInfoOptions> options) =>
         _options = options;
-    
+
     public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken ct = default)
     {
         try

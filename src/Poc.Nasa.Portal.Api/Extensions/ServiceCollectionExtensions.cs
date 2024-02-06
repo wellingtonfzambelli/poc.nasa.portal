@@ -1,11 +1,19 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using MySql.Data.MySqlClient;
-using Poc.Nasa.Portal.Api.HealthCheck;
+using Poc.Nasa.Portal.App.Extensions;
+using Poc.Nasa.Portal.App.HealthCheck;
 
 namespace Poc.Nasa.Portal.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+    public static void AddServiceCollection(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddHttpContextAccessor();
+        services.AddApisServiceCollection(configuration);
+        //services.AddScoped<IMediator>(x => new Mediator(type => x.GetRequiredService(type)));
+    }
+
     public static IHealthChecksBuilder AddHealthCheckMySql
         (
             this IHealthChecksBuilder builder,

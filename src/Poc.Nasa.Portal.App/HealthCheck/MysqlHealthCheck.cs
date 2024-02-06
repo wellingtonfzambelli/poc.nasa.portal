@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using MySql.Data.MySqlClient;
 
-namespace Poc.Nasa.Portal.Api.HealthCheck;
+namespace Poc.Nasa.Portal.App.HealthCheck;
 
 public sealed class MysqlHealthCheck : IHealthCheck
 {

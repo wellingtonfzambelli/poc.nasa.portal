@@ -23,6 +23,7 @@ services:
       - 30001
     volumes:
       - my-db:/var/lib/mysql
+      #- "./db.sql:/docker-entrypoint-initdb.d/1.sql"
     networks:
       - nasa-networks
 

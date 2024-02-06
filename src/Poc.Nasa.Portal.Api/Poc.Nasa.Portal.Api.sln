@@ -7,7 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.Nasa.Portal.Api", "Poc.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.Nasa.Portal.Integration", "..\Poc.Nasa.Portal.Integration\Poc.Nasa.Portal.Integration.csproj", "{C87372F6-5DB7-4464-AC9F-08557CC8B2B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.Nasa.Portal.Infrastructure", "..\Poc.Nasa.Portal.Infrastructure\Poc.Nasa.Portal.Infrastructure.csproj", "{1E3C258B-C8F5-4F0E-9E0A-DB34BF3AA2BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.Nasa.Portal.Infrastructure", "..\Poc.Nasa.Portal.Infrastructure\Poc.Nasa.Portal.Infrastructure.csproj", "{1E3C258B-C8F5-4F0E-9E0A-DB34BF3AA2BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{5BC66996-A5E9-4778-A9A3-F6244E906E8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainAndInfra", "DomainAndInfra", "{F1FDEAD9-3A43-4ADA-9D4A-80DCDBC1AD58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{98DD5092-98AA-4CE3-8D06-79E738377CAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F2A63FE3-91FB-467D-9E25-7D4007809DD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.Nasa.Portal.Tests", "..\Poc.Nasa.Portal.Tests\Poc.Nasa.Portal.Tests.csproj", "{675B0FFE-1FA6-48F7-8714-E5145CA2FA25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.Nasa.Portal.App", "..\Poc.Nasa.Portal.App\Poc.Nasa.Portal.App.csproj", "{9A1A257B-B5BB-43B4-B85D-7371626A9CEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +39,25 @@ Global
 		{1E3C258B-C8F5-4F0E-9E0A-DB34BF3AA2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E3C258B-C8F5-4F0E-9E0A-DB34BF3AA2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E3C258B-C8F5-4F0E-9E0A-DB34BF3AA2BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{675B0FFE-1FA6-48F7-8714-E5145CA2FA25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{675B0FFE-1FA6-48F7-8714-E5145CA2FA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{675B0FFE-1FA6-48F7-8714-E5145CA2FA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{675B0FFE-1FA6-48F7-8714-E5145CA2FA25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A1A257B-B5BB-43B4-B85D-7371626A9CEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A1A257B-B5BB-43B4-B85D-7371626A9CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A1A257B-B5BB-43B4-B85D-7371626A9CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A1A257B-B5BB-43B4-B85D-7371626A9CEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6255AC70-9D5A-4F8F-9CBA-7C2DF58CF3A1} = {5BC66996-A5E9-4778-A9A3-F6244E906E8B}
+		{C87372F6-5DB7-4464-AC9F-08557CC8B2B2} = {F1FDEAD9-3A43-4ADA-9D4A-80DCDBC1AD58}
+		{1E3C258B-C8F5-4F0E-9E0A-DB34BF3AA2BE} = {F1FDEAD9-3A43-4ADA-9D4A-80DCDBC1AD58}
+		{F1FDEAD9-3A43-4ADA-9D4A-80DCDBC1AD58} = {98DD5092-98AA-4CE3-8D06-79E738377CAA}
+		{675B0FFE-1FA6-48F7-8714-E5145CA2FA25} = {F2A63FE3-91FB-467D-9E25-7D4007809DD6}
+		{9A1A257B-B5BB-43B4-B85D-7371626A9CEB} = {5BC66996-A5E9-4778-A9A3-F6244E906E8B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {157AA188-85ED-4F04-9438-08559CD8184B}

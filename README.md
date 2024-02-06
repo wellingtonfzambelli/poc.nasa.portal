@@ -1,8 +1,15 @@
 # poc.nasa.portal
 
+# Thrid-party Nasa Api: https://api.nasa.gov/
+
 Healhcheck
 	ok - mysql
+Docker
+	ok - Mysql
+	Rabbit
+	ElasticSearch
 Swagger
+Sonnar Cube
 Mediatr
 Memcache
 action filters
@@ -18,6 +25,3 @@ Redis
 Api Integration
 Api Gateway
 Angular
-Docker
-	Mysql
-	ElasticSearch

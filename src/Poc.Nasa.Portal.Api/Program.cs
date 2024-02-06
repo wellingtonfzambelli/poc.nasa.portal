@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using Poc.Nasa.Portal.Api.EF;
 using Poc.Nasa.Portal.Api.Extensions;
 using Poc.Nasa.Portal.Api.Filters;
+using Poc.Nasa.Portal.App.HealthCheck;
 using Serilog;
 using Serilog.Events;
 using System.Text.Json;
@@ -51,9 +52,10 @@ string connection = _configuration.GetValue<string>("CONNECTIONSTRING");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
 builder.Services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));
 
-// HC
+// HealthCheck
 builder.Services.AddHealthChecks()
-    .AddHealthCheckMySql(builder.Configuration["CONNECTIONSTRING"], name: "MySQL");
+    .AddHealthCheckMySql(connection, name: "MySQL")
+    .AddCheck<GCInfoHealthCheck>("GC");
 
 // Add services to the container.
 builder.Services.AddControllers(config =>
@@ -61,9 +63,10 @@ builder.Services.AddControllers(config =>
     config.Filters.Add(typeof(ExceptionFilter));
 }).AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)));
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddServiceCollection(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

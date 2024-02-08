@@ -10,15 +10,19 @@ Docker
 	Rabbit
 	ElasticSearch
 Swagger
-Sonnar Cube
-Mediatr
-Memcache
-action filters
+	ok	
 Serilog
 	ok - mysql
 	ok - file
 	ok - console
 	elastic
+Fluent Validation
+	ok
+
+Sonnar Cube
+Mediatr
+Memcache
+action filters
 Kibana
 RabbitMQ
 Identity

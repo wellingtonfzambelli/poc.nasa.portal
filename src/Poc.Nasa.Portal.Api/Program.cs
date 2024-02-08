@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -6,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using Poc.Nasa.Portal.Api.Extensions;
 using Poc.Nasa.Portal.Api.Filters;
 using Poc.Nasa.Portal.App.HealthCheck;
+using Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Serilog;
 using Serilog.Events;
@@ -65,6 +67,12 @@ builder.Services.AddControllers(config =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServiceCollection(builder.Configuration);
+
+
+// DI
+builder.Services.AddTransient<AstronomyPictureOfTheDayHandler>();
+builder.Services.AddControllers()
+    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AstronomyPictureOfTheDayValidator>());
 
 var app = builder.Build();
 

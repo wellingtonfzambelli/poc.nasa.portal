@@ -9,8 +9,11 @@ using Poc.Nasa.Portal.Api.Filters;
 using Poc.Nasa.Portal.App.HealthCheck;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
+using Poc.Nasa.Portal.Integration.NasaPortal;
+using Poc.Nasa.Portal.Integration.Shared.HttpClientBase;
 using Serilog;
 using Serilog.Events;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -74,6 +77,8 @@ builder.Services.AddTransient<AstronomyPictureOfTheDayHandler>();
 builder.Services.AddControllers()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AstronomyPictureOfTheDayValidator>());
 
+AddClient(builder.Services, _configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -120,3 +125,29 @@ static Task WriteResponse(HttpContext httpContext, HealthReport result)
 }
 
 app.Run();
+
+static void AddClient(IServiceCollection services, IConfiguration config)
+{
+    var timeout = new TimeSpan(0, 0, 50);
+    var mediaType = new MediaTypeWithQualityHeaderValue("application/json");
+    var nasaBaseAddress = new Uri($"{config.ApiNasaAddress()}");
+
+    // NASA Api
+    services.AddHttpClient(NamedHttpClients.NASA_PORTAL_CLIENT).ConfigureHttpClient(x =>
+    {
+        x.BaseAddress = nasaBaseAddress;
+        x.DefaultRequestHeaders.Accept.Clear();
+        x.DefaultRequestHeaders.Accept.Add(mediaType);
+        x.Timeout = timeout;
+    });
+
+    services.AddScoped<INasaPortalClient>(p =>
+        new NasaPortalClient(
+            new BaseHttpClient(
+                p.GetService<IHttpClientFactory>().CreateClient(NamedHttpClients.NASA_PORTAL_CLIENT),
+                p.GetService<ILogger<BaseHttpClient>>()
+            ),
+            p.GetService<ILogger<NasaPortalClient>>(),
+            config.ApiNasaApiKey())
+        );
+}

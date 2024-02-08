@@ -9,6 +9,8 @@ public static class GlobalParams
         configuration.GetValue<string>("CONNECTIONSTRING");
 
     // API NASA
-    public static string ApiServerNASA(this IConfiguration configuration) =>
-        configuration.GetValue<string>("API_SERVER_NASA");
+    public static string ApiNasaAddress(this IConfiguration configuration) =>
+        configuration.GetValue<string>("API_NASA_ADDRESS");
+    public static string ApiNasaApiKey(this IConfiguration configuration) =>
+        configuration.GetValue<string>("API_NASA_APIKEY");
 }

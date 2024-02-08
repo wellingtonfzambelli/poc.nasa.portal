@@ -2,6 +2,20 @@
 
 public interface IBaseHttpClient
 {
-    Task<HttpResponseMessage> GetAsync(Guid correlationId, string requestUri, CancellationToken ct);
-    Task<HttpResponseMessage> GetAsync(Guid correlationId, string requestUri, IReadOnlyDictionary<string, IEnumerable<string>> headers, CancellationToken ct);
+    Task<HttpResponseMessage> GetAsync
+    (
+        string requestUri,
+        IReadOnlyDictionary<string, string> queryStrings,
+        Guid trackId,
+        CancellationToken ct
+    );
+
+    Task<HttpResponseMessage> GetAsync
+    (
+        string requestUri,
+        IReadOnlyDictionary<string, IEnumerable<string>> headers,
+        IReadOnlyDictionary<string, string> queryStrings,
+        Guid trackId,
+        CancellationToken ct
+    );
 }

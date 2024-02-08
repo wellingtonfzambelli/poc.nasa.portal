@@ -1,21 +1,27 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using System.Net;
+using System.Text.Json;
 
 namespace Poc.Nasa.Portal.Integration.Shared.HttpClientBase;
 
 public sealed class BaseHttpClient : IBaseHttpClient
 {
     private readonly HttpClient _httpClient;
+    private readonly ILogger<BaseHttpClient> _logger;
 
-    public BaseHttpClient(HttpClient httpClient)
+    public BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClient> logger)
     {
         _httpClient = httpClient;
+        _logger = logger;
     }
 
     public async Task<HttpResponseMessage> GetAsync
     (
-        Guid correlationId,
         string requestUri,
+        IReadOnlyDictionary<string, string> queryStrings,
+        Guid trackId,
         CancellationToken ct
     )
     {
@@ -23,25 +29,32 @@ public sealed class BaseHttpClient : IBaseHttpClient
         stopwatch.Start();
 
         var urlFull = $"{_httpClient.BaseAddress}{requestUri}";
-        //await LogRequestAsync(correlationId, urlFull);
+        _logger.LogInformation($"trackId: {trackId} - urlFull: {urlFull}");
 
-        var responseMessage = await new ValueTask<HttpResponseMessage>(
+        HttpResponseMessage responseMessage = null;
+
+        if (queryStrings is null)
+            responseMessage = await new ValueTask<HttpResponseMessage>(
             _httpClient.GetAsync(urlFull, HttpCompletionOption.ResponseHeadersRead, ct));
+        else
+            responseMessage = await new ValueTask<HttpResponseMessage>(
+            _httpClient.GetAsync(QueryHelpers.AddQueryString(urlFull, queryStrings), ct));
 
         if (ct.IsCancellationRequested)
             return new HttpResponseMessage(HttpStatusCode.InternalServerError);
 
         stopwatch.Stop();
+        _logger.LogInformation($"trackId: {trackId} - reponseMessage: {JsonSerializer.Serialize(responseMessage)} - Timing: {stopwatch.Elapsed}");
 
-        //await LogResponseAsync(correlationId, urlFull, responseMessage, stopwatch.Elapsed);
         return responseMessage;
     }
 
     public async Task<HttpResponseMessage> GetAsync
     (
-        Guid correlationId,
         string requestUri,
         IReadOnlyDictionary<string, IEnumerable<string>> headers,
+        IReadOnlyDictionary<string, string> queryStrings,
+        Guid trackId,
         CancellationToken ct
     )
     {
@@ -53,6 +66,6 @@ public sealed class BaseHttpClient : IBaseHttpClient
             _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
         }
 
-        return await GetAsync(correlationId, requestUri, ct);
+        return await GetAsync(requestUri, queryStrings, trackId, ct);
     }
 }

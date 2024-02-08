@@ -13,10 +13,13 @@
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
     <PackageReference Include="MySql.Data" Version="8.3.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+    <PackageReference Include="Serilog.Sinks.MySQL" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Poc.Nasa.Portal.Infrastructure\Poc.Nasa.Portal.Infrastructure.csproj" />
+    <ProjectReference Include="..\Poc.Nasa.Portal.Integration\Poc.Nasa.Portal.Integration.csproj" />
   </ItemGroup>
 
 </Project>

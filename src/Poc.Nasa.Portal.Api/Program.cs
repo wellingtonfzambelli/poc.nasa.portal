@@ -37,6 +37,7 @@ builder.Host.ConfigureAppConfiguration((hostingContext, configurationBuilder) =>
     _configuration = configurationBuilder.Build();
 });
 
+// Serilog
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
     .MinimumLevel.Information()
@@ -52,6 +53,7 @@ builder.Host.UseSerilog((context, configuration) =>
         _configuration.ConnectionString(),
     "EventLog"));
 
+// MySQL
 string connection = _configuration.ConnectionString();
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
 builder.Services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));

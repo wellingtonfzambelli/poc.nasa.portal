@@ -19,6 +19,8 @@ Serilog
 Fluent Validation
 	ok
 Third-party
+	in progress
+
 Sonnar Cube
 Mediatr
 Memcache

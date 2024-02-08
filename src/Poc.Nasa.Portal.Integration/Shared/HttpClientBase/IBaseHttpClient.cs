@@ -4,7 +4,7 @@ public interface IBaseHttpClient
 {
     Task<HttpResponseMessage> GetAsync
     (
-        string requestUri,
+        string endpoint,
         IReadOnlyDictionary<string, string> queryStrings,
         Guid trackId,
         CancellationToken ct
@@ -12,7 +12,7 @@ public interface IBaseHttpClient
 
     Task<HttpResponseMessage> GetAsync
     (
-        string requestUri,
+        string endpoint,
         IReadOnlyDictionary<string, IEnumerable<string>> headers,
         IReadOnlyDictionary<string, string> queryStrings,
         Guid trackId,

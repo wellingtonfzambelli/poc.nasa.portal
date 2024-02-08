@@ -24,7 +24,7 @@ public sealed class NasaPortalClient : INasaPortalClient
     public async Task<GetPictureOfTheDayResponseDto> GetPictureOfTheDayAsync(
         Guid trackId, CancellationToken ct)
     {
-        string requestUri = "planetary/apod";
+        string enpoint = "planetary/apod";
 
         try
         {
@@ -37,7 +37,7 @@ public sealed class NasaPortalClient : INasaPortalClient
 
             var responseMessage = await _baseHttpClient.GetAsync
             (
-                requestUri,
+                enpoint,
                 queryStrings,
                 trackId,
                 ct

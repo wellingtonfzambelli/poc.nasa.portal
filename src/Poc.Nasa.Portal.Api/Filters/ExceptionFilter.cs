@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Poc.Nasa.Portal.App.Shared.Dt;
+using Poc.Nasa.Portal.Infrastructure.Configurations;
 using System.Net;
 
 namespace Poc.Nasa.Portal.Api.Filters;
@@ -28,7 +29,15 @@ internal sealed class ExceptionFilter : IExceptionFilter
         response.StatusCode = (int)HttpStatusCode.BadRequest;
         response.ContentType = "application/json";
         context.ExceptionHandled = true;
-        context.Result = new BadRequestObjectResult(new[] { new BadRequestDto { Code = "NASA000", Message = "Generic Error" } });
+        context.Result = new BadRequestObjectResult(
+            new[]
+            {
+                new BadRequestDto
+                {
+                    Code = MessageValidation.GeneralError.code,
+                    Message = MessageValidation.GeneralError.description
+                }
+            });
 
         _logger.LogError(context.Exception, null);
     }

@@ -10,6 +10,6 @@ public sealed class AstronomyPictureOfTheDayRequestHandlerDto : IRequest<Astrono
         TrackId = trackId;
     }
 
-    public AstronomyPictureOfTheDayRequestDto RequestDto { get; set; }
     public Guid TrackId { get; set; }
+    public AstronomyPictureOfTheDayRequestDto RequestDto { get; set; }
 }

@@ -24,7 +24,6 @@ Third-party
 	in progress
 
 Sonnar Cube
-
 Memcache
 action filters
 Kibana

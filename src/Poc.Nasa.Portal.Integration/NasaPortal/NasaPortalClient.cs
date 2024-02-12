@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Poc.Nasa.Portal.Integration.Shared.HttpClientBase;
 
 namespace Poc.Nasa.Portal.Integration.NasaPortal;
@@ -44,12 +45,28 @@ public sealed class NasaPortalClient : INasaPortalClient
             );
 
             var jsonResponse = await responseMessage.Content.ReadAsStringAsync();
+
+            if (responseMessage.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<GetPictureOfTheDayResponseDto>(jsonResponse);
+
+            return ExtractBadRequest(jsonResponse, trackId);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, $"trackId: {trackId}");
+            throw ex;
         }
+    }
 
-        return null;
+    private GetPictureOfTheDayResponseDto ExtractBadRequest(string jsonResponse, Guid trackId)
+    {
+        _logger.LogWarning(jsonResponse, $"trackId: {trackId}");
+
+        var responseErro = JsonConvert.DeserializeObject<NasaBadRequestDto>(jsonResponse);
+
+        var response = new GetPictureOfTheDayResponseDto();
+        response.SetError(responseErro);
+
+        return response;
     }
 }

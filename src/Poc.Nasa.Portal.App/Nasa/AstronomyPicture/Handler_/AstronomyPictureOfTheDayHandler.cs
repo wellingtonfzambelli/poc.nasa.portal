@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
+using Poc.Nasa.Portal.App.Shared;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 
 namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
@@ -31,11 +32,19 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
 
         if (await _validator.ValidateAsync(request.RequestDto, cancellationToken)
             is var validation && !validation.IsValid)
-            return null;
+        {
+            response.AddErrorValidationResult(validation);
+            return response;
+        }
 
         if (await _nasaPortalClient.GetPictureOfTheDayAsync(request.TrackId, cancellationToken)
-            is var nasaResponse && nasaResponse is null)
-            return null;
+            is var nasaResponseClient && nasaResponseClient.IsValid() == false)
+        {
+            var error = nasaResponseClient.GetError().error;
+            response.SetError(new ErrorResponse(error.code, error.message));
+
+            return response;
+        }
 
         return response;
     }

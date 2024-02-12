@@ -15,7 +15,6 @@ public sealed class AstronomyPictureController : AstronomyBaseController
     public AstronomyPictureController(IMediator mediator) : base(mediator)
     { }
 
-
     [HttpGet]
     [Route("info/{date}")]
     [ProducesResponseType(typeof(AstronomyPictureOfTheDayResponseDto), (int)HttpStatusCode.OK)]
@@ -34,9 +33,9 @@ public sealed class AstronomyPictureController : AstronomyBaseController
                 trackId),
             ct);
 
-        if (response is null)
-            return BadRequest();
+        if (response.Result.IsValid())
+            return Ok(response.Result);
 
-        return Ok(response);
+        return BadRequest(response.Result.GetErrors());
     }
 }

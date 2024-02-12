@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Poc.Nasa.Portal.Api.Shared;
+namespace Poc.Nasa.Portal.Api.Controllers.Base;
 
 public abstract class AstronomyBaseController : ControllerBase
 {

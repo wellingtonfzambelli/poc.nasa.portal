@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Poc.Nasa.Portal.App.Shared.Dt;
 using System.Net;
 
 namespace Poc.Nasa.Portal.Api.Filters;
@@ -30,11 +31,5 @@ internal sealed class ExceptionFilter : IExceptionFilter
         context.Result = new BadRequestObjectResult(new[] { new BadRequestDto { Code = "NASA000", Message = "Generic Error" } });
 
         _logger.LogError(context.Exception, null);
-    }
-
-    struct BadRequestDto
-    {
-        public string Code { get; set; }
-        public string Message { get; set; }
     }
 }

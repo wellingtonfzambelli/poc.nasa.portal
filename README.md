@@ -18,11 +18,13 @@ Serilog
 	elastic
 Fluent Validation
 	ok
+Mediatr
+	ok
 Third-party
 	in progress
 
 Sonnar Cube
-Mediatr
+
 Memcache
 action filters
 Kibana

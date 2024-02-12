@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 
 namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
 
-public sealed class AstronomyPictureOfTheDayHandler
+public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyPictureOfTheDayRequestHandlerDto, AstronomyPictureOfTheDayResponseDto>
 {
     private readonly AstronomyPictureOfTheDayValidator _validator;
     private readonly INasaPortalClient _nasaPortalClient;
@@ -21,18 +22,18 @@ public sealed class AstronomyPictureOfTheDayHandler
         _logger = logger;
     }
 
-    public async Task<AstronomyPictureOfTheDayResponseDto> HandleAsync(
-        AstronomyPictureOfTheDayRequestDto request, CancellationToken ct)
+    public async Task<AstronomyPictureOfTheDayResponseDto> Handle(
+        AstronomyPictureOfTheDayRequestHandlerDto request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("info AstronomyPictureOfTheDayHandler");
 
         var response = new AstronomyPictureOfTheDayResponseDto();
 
-        if (await _validator.ValidateAsync(request, ct)
+        if (await _validator.ValidateAsync(request.RequestDto, cancellationToken)
             is var validation && !validation.IsValid)
             return null;
 
-        if (await _nasaPortalClient.GetPictureOfTheDayAsync(Guid.NewGuid(), ct)
+        if (await _nasaPortalClient.GetPictureOfTheDayAsync(request.TrackId, cancellationToken)
             is var nasaResponse && nasaResponse is null)
             return null;
 

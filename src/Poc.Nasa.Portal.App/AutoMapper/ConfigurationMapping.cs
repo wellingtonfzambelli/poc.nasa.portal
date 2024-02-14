@@ -8,7 +8,7 @@ public sealed class ConfigurationMapping : Profile
 {
     public ConfigurationMapping()
     {
-        CreateMap<GetPictureOfTheDayResponseDto, AstronomyPictureOfTheDayResponseDto>()
+        CreateMap<GetPictureOfTheDayResponseClientDto, AstronomyPictureOfTheDayResponseDto>()
             .ForMember(dest => dest.Hdurl, opt => opt.MapFrom(src => src.Hdurl))
             .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date))
             .ForMember(dest => dest.Copyright, opt => opt.MapFrom(src => src.Copyright))

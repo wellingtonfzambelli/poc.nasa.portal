@@ -1,11 +1,11 @@
 ﻿namespace Poc.Nasa.Portal.Integration.NasaPortal;
 
-public sealed class NasaBadRequestDto
+public sealed class NasaBadRequestClientDto
 {
-    public NasaErrorDto error { get; set; }
+    public NasaErrorClientDto error { get; set; }
 }
 
-public sealed class NasaErrorDto
+public sealed class NasaErrorClientDto
 {
     public string code { get; set; }
     public string message { get; set; }

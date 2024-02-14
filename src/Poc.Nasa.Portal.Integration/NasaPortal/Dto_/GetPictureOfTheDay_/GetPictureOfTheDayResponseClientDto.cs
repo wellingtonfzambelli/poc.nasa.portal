@@ -1,6 +1,6 @@
 ﻿namespace Poc.Nasa.Portal.Integration.NasaPortal;
 
-public sealed class GetPictureOfTheDayResponseDto : NasaResponseBaseDto
+public sealed class GetPictureOfTheDayResponseClientDto : NasaResponseBaseClientDto
 {
     public string Copyright { get; set; }
     public DateTime Date { get; set; }

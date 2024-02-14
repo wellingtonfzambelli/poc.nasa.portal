@@ -22,7 +22,7 @@ public sealed class NasaPortalClient : INasaPortalClient
         _apiKey = apiKey;
     }
 
-    public async Task<GetPictureOfTheDayResponseDto> GetPictureOfTheDayAsync(
+    public async Task<GetPictureOfTheDayResponseClientDto> GetPictureOfTheDayAsync(
         Guid trackId, CancellationToken ct)
     {
         string enpoint = "planetary/apod";
@@ -47,7 +47,7 @@ public sealed class NasaPortalClient : INasaPortalClient
             var jsonResponse = await responseMessage.Content.ReadAsStringAsync();
 
             if (responseMessage.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<GetPictureOfTheDayResponseDto>(jsonResponse);
+                return JsonConvert.DeserializeObject<GetPictureOfTheDayResponseClientDto>(jsonResponse);
 
             return ExtractBadRequest(jsonResponse, trackId);
         }
@@ -58,13 +58,13 @@ public sealed class NasaPortalClient : INasaPortalClient
         }
     }
 
-    private GetPictureOfTheDayResponseDto ExtractBadRequest(string jsonResponse, Guid trackId)
+    private GetPictureOfTheDayResponseClientDto ExtractBadRequest(string jsonResponse, Guid trackId)
     {
         _logger.LogWarning(jsonResponse, $"trackId: {trackId}");
 
-        var responseErro = JsonConvert.DeserializeObject<NasaBadRequestDto>(jsonResponse);
+        var responseErro = JsonConvert.DeserializeObject<NasaBadRequestClientDto>(jsonResponse);
 
-        var response = new GetPictureOfTheDayResponseDto();
+        var response = new GetPictureOfTheDayResponseClientDto();
         response.SetError(responseErro);
 
         return response;

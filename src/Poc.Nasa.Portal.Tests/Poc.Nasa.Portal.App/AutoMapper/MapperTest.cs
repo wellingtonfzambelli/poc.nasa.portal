@@ -21,7 +21,7 @@ public sealed class MapperTest
         var config = new MapperConfiguration(cfg => cfg.AddProfile<ConfigurationMapping>());
         var mapper = config.CreateMapper();
 
-        var source = new GetPictureOfTheDayResponseDto
+        var source = new GetPictureOfTheDayResponseClientDto
         {
             Copyright = "copy",
             Date = DateTime.Today,
@@ -32,7 +32,7 @@ public sealed class MapperTest
         };
 
         // act
-        var result = mapper.Map<GetPictureOfTheDayResponseDto, AstronomyPictureOfTheDayResponseDto>(source);
+        var result = mapper.Map<GetPictureOfTheDayResponseClientDto, AstronomyPictureOfTheDayResponseDto>(source);
 
         // assert
         Assert.NotNull(result);

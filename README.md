@@ -20,13 +20,18 @@ Fluent Validation
 	ok
 MediatR
 	ok
+Automapper
+	ok
+Action filters
+	ok
+
 Third-party
 	in progress
+Unit Test
+	in progress
 
-Automapper
 Sonnar Cube
 Memcache
-action filters
 Kibana
 RabbitMQ
 Identity
@@ -34,4 +39,3 @@ Redis
 Api Integration
 Api Gateway
 Angular
-Unit Test

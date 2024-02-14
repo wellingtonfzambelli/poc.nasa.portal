@@ -18,11 +18,12 @@ Serilog
 	elastic
 Fluent Validation
 	ok
-Mediatr
+MediatR
 	ok
 Third-party
 	in progress
 
+Automapper
 Sonnar Cube
 Memcache
 action filters

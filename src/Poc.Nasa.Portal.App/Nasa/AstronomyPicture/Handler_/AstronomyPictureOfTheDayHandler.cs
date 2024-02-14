@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using Poc.Nasa.Portal.App.Shared;
 using Poc.Nasa.Portal.Integration.NasaPortal;
@@ -9,17 +10,20 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
 {
     private readonly AstronomyPictureOfTheDayValidator _validator;
     private readonly INasaPortalClient _nasaPortalClient;
+    private readonly IMapper _mapper;
     private readonly ILogger<AstronomyPictureOfTheDayHandler> _logger;
 
     public AstronomyPictureOfTheDayHandler
     (
         AstronomyPictureOfTheDayValidator validator,
         INasaPortalClient nasaPortalClient,
+        IMapper mapper,
         ILogger<AstronomyPictureOfTheDayHandler> logger
     )
     {
         _validator = validator;
         _nasaPortalClient = nasaPortalClient;
+        _mapper = mapper;
         _logger = logger;
     }
 
@@ -38,7 +42,7 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
         }
 
         if (await _nasaPortalClient.GetPictureOfTheDayAsync(request.TrackId, cancellationToken)
-            is var nasaResponseClient && nasaResponseClient.IsValid() == false)
+            is var nasaResponseClient && !nasaResponseClient.IsValid())
         {
             var error = nasaResponseClient.GetError().error;
             response.SetError(new ErrorResponse(error.code, error.message));
@@ -46,6 +50,6 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
             return response;
         }
 
-        return response;
+        return _mapper.Map<AstronomyPictureOfTheDayResponseDto>(nasaResponseClient);
     }
 }

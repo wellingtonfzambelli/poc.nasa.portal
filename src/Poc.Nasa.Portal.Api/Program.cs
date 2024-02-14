@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Poc.Nasa.Portal.Api.Extensions;
 using Poc.Nasa.Portal.Api.Filters;
+using Poc.Nasa.Portal.App.AutoMapper;
 using Poc.Nasa.Portal.App.HealthCheck;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
@@ -79,9 +80,8 @@ builder.Services.AddServiceCollection(builder.Configuration);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddScoped<IRequestHandler<AstronomyPictureOfTheDayRequestHandlerDto, AstronomyPictureOfTheDayResponseDto>, AstronomyPictureOfTheDayHandler>();
 builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AstronomyPictureOfTheDayValidator>());
-
+builder.Services.AddAutoMapper(typeof(ConfigurationMapping));
 AddClient(builder.Services, _configuration);
-
 
 var app = builder.Build();
 

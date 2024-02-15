@@ -13,4 +13,8 @@
     <PackageReference Include="Serilog.Sinks.MySQL" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Poc.Nasa.Portal.Domain\Poc.Nasa.Portal.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

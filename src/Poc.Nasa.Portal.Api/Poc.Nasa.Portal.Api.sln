@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1A5F181C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.Nasa.Portal.Tests", "..\Poc.Nasa.Portal.Tests\Poc.Nasa.Portal.Tests.csproj", "{35FFF9D2-78F8-4B71-99A6-1D19C56C5095}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.Nasa.Portal.Domain", "..\Poc.Nasa.Portal.Domain\Poc.Nasa.Portal.Domain.csproj", "{D8F3FD37-65F0-4226-BB6B-BD3851481865}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{35FFF9D2-78F8-4B71-99A6-1D19C56C5095}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35FFF9D2-78F8-4B71-99A6-1D19C56C5095}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35FFF9D2-78F8-4B71-99A6-1D19C56C5095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8F3FD37-65F0-4226-BB6B-BD3851481865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8F3FD37-65F0-4226-BB6B-BD3851481865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8F3FD37-65F0-4226-BB6B-BD3851481865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8F3FD37-65F0-4226-BB6B-BD3851481865}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{F1FDEAD9-3A43-4ADA-9D4A-80DCDBC1AD58} = {98DD5092-98AA-4CE3-8D06-79E738377CAA}
 		{9A1A257B-B5BB-43B4-B85D-7371626A9CEB} = {5BC66996-A5E9-4778-A9A3-F6244E906E8B}
 		{35FFF9D2-78F8-4B71-99A6-1D19C56C5095} = {1A5F181C-5441-452A-A525-F6CCE6668B20}
+		{D8F3FD37-65F0-4226-BB6B-BD3851481865} = {F1FDEAD9-3A43-4ADA-9D4A-80DCDBC1AD58}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {157AA188-85ED-4F04-9438-08559CD8184B}

@@ -5,6 +5,8 @@
 Healhcheck
 	ok - mysql
 	ok - memory
+	RabbitMQ
+	ElasticSearch
 Docker
 	ok - Mysql
 	Rabbit
@@ -15,7 +17,7 @@ Serilog
 	ok - mysql
 	ok - file
 	ok - console
-	elastic
+	ElasticSearch
 Fluent Validation
 	ok
 MediatR
@@ -29,7 +31,14 @@ Third-party
 	in progress
 Unit Test
 	in progress
+Docker
+	ok - Mysql
+	RabbitMQ
+EF 
+	Migration
+	MySql
 
+ElasticSearch
 Sonnar Cube
 Memcache
 Kibana

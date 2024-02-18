@@ -8,7 +8,7 @@ public sealed class PictureOfTheDay : BaseModel
     public PictureOfTheDay() { }
 
     public string Copyight { get; private set; }
-    public DateTime Date { get; private set; }
+    public DateTime PictureDate { get; private set; }
     public string Explanation { get; private set; }
     public string HdUrl { get; private set; }
     public string Title { get; private set; }

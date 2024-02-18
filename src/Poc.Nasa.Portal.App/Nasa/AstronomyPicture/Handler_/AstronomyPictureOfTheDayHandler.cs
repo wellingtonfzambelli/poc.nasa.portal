@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Poc.Nasa.Portal.App.Shared;
+using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 
 namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
@@ -12,19 +13,22 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
     private readonly INasaPortalClient _nasaPortalClient;
     private readonly IMapper _mapper;
     private readonly ILogger<AstronomyPictureOfTheDayHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
     public AstronomyPictureOfTheDayHandler
     (
         AstronomyPictureOfTheDayValidator validator,
         INasaPortalClient nasaPortalClient,
         IMapper mapper,
-        ILogger<AstronomyPictureOfTheDayHandler> logger
+        ILogger<AstronomyPictureOfTheDayHandler> logger,
+        IUnitOfWork unitOfWork
     )
     {
         _validator = validator;
         _nasaPortalClient = nasaPortalClient;
         _mapper = mapper;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<AstronomyPictureOfTheDayResponseDto> Handle(
@@ -41,6 +45,10 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
             return response;
         }
 
+        if (await _unitOfWork.PictureOfTheDayRepository.GetByDateAsync(request.RequestDto.Date, cancellationToken)
+            is var pictureDB && pictureDB is not null)
+            return null;
+
         if (await _nasaPortalClient.GetPictureOfTheDayAsync(request.TrackId, cancellationToken)
             is var nasaResponseClient && !nasaResponseClient.IsValid())
         {
@@ -50,6 +58,12 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
             return response;
         }
 
+        await PublishQueueAsync(cancellationToken);
+
         return _mapper.Map<AstronomyPictureOfTheDayResponseDto>(nasaResponseClient);
+    }
+
+    private async Task PublishQueueAsync(CancellationToken ct)
+    { 
     }
 }

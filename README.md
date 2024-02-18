@@ -45,6 +45,7 @@ Kibana
 RabbitMQ
 Identity
 Redis
-Api Integration
-Api Gateway
+BFF
+Api Gateway (Ocelot)
 Angular
+Benchmark

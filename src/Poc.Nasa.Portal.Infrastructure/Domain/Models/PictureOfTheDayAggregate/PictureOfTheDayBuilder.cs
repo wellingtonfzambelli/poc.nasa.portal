@@ -17,7 +17,7 @@ public sealed class PictureOfTheDayBuilder
             .HasColumnType("varchar(200)")
             .IsRequired();
 
-        builder.Property(x => x.Date)
+        builder.Property(x => x.PictureDate)
             .HasColumnType("Datetime")
             .IsRequired();
 

@@ -22,7 +22,6 @@ public sealed class NasaPortalContext : DbContext
     {
         if (_loggerFactory != null)
             optionsBuilder
-                //.UseMySql("")
                 .UseLoggerFactory(_loggerFactory)
                 .EnableSensitiveDataLogging(false);
     }

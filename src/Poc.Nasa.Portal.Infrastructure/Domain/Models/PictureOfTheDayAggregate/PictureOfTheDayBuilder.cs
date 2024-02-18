@@ -13,7 +13,7 @@ public sealed class PictureOfTheDayBuilder
         // Keys
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Copyight)
+        builder.Property(x => x.Copyright)
             .HasColumnType("varchar(200)")
             .IsRequired();
 

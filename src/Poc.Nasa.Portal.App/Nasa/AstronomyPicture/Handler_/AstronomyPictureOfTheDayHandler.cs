@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Poc.Nasa.Portal.App.Shared;
+using Poc.Nasa.Portal.Domain.Models.PictureOfTheDayAggregate;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 
@@ -49,7 +50,7 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
             is var pictureDB && pictureDB is not null)
             return _mapper.Map<AstronomyPictureOfTheDayResponseDto>(pictureDB);
 
-        if (await _nasaPortalClient.GetPictureOfTheDayAsync(request.TrackId, cancellationToken)
+        if (await _nasaPortalClient.GetPictureOfTheDayAsync(request.RequestDto.Date, request.TrackId, cancellationToken)
             is var nasaResponseClient && !nasaResponseClient.IsValid())
         {
             var error = nasaResponseClient.GetError().error;
@@ -57,6 +58,17 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
 
             return response;
         }
+
+        await _unitOfWork.PictureOfTheDayRepository.CreateAsync(
+            new PictureOfTheDay(
+                nasaResponseClient.Copyright,
+                nasaResponseClient.Date,
+                nasaResponseClient.Explanation,
+                nasaResponseClient.Hdurl,
+                nasaResponseClient.Title,
+                nasaResponseClient.Url),
+            cancellationToken);
+        await _unitOfWork.SaveAsync(cancellationToken);
 
         await PublishQueueAsync(cancellationToken);
 

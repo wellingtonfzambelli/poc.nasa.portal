@@ -2,5 +2,6 @@
 
 public interface INasaPortalClient
 {
-    Task<GetPictureOfTheDayResponseClientDto> GetPictureOfTheDayAsync(Guid trackId, CancellationToken ct);
+    Task<GetPictureOfTheDayResponseClientDto> GetPictureOfTheDayAsync(
+        DateTime dateOfPicture, Guid trackId, CancellationToken ct);
 }

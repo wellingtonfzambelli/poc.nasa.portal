@@ -23,7 +23,7 @@ public sealed class NasaPortalClient : INasaPortalClient
     }
 
     public async Task<GetPictureOfTheDayResponseClientDto> GetPictureOfTheDayAsync(
-        Guid trackId, CancellationToken ct)
+        DateTime dateOfPicture, Guid trackId, CancellationToken ct)
     {
         string enpoint = "planetary/apod";
 
@@ -31,9 +31,8 @@ public sealed class NasaPortalClient : INasaPortalClient
         {
             var queryStrings = new Dictionary<string, string>()
             {
-                {
-                    "api_key", _apiKey
-                }
+                { "api_key", _apiKey },
+                { "date", dateOfPicture.ToString("yyyy-MM-dd") }
             };
 
             var responseMessage = await _baseHttpClient.GetAsync

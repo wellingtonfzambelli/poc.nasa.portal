@@ -26,6 +26,9 @@ Automapper
 	ok
 Action filters
 	ok
+EF MySql
+	ok	
+
 
 Third-party
 	in progress
@@ -34,9 +37,7 @@ Unit Test
 Docker
 	ok - Mysql
 	RabbitMQ
-EF 
-	Migration
-	MySql
+
 
 ElasticSearch
 Sonnar Cube

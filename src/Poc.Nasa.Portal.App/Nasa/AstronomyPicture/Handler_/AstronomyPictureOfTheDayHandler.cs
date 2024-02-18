@@ -47,7 +47,7 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
 
         if (await _unitOfWork.PictureOfTheDayRepository.GetByDateAsync(request.RequestDto.Date, cancellationToken)
             is var pictureDB && pictureDB is not null)
-            return null;
+            return _mapper.Map<AstronomyPictureOfTheDayResponseDto>(pictureDB);
 
         if (await _nasaPortalClient.GetPictureOfTheDayAsync(request.TrackId, cancellationToken)
             is var nasaResponseClient && !nasaResponseClient.IsValid())
@@ -64,6 +64,6 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
     }
 
     private async Task PublishQueueAsync(CancellationToken ct)
-    { 
+    {
     }
 }

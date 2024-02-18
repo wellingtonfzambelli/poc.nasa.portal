@@ -19,7 +19,6 @@ public sealed class AstronomyPictureController : AstronomyBaseController
     [Route("info/{date}")]
     [ProducesResponseType(typeof(AstronomyPictureOfTheDayResponseDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(BadRequestDto), (int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetPictureByDateAsync
     (
         [FromHeader(Name = TrackId)][Required] Guid trackId,

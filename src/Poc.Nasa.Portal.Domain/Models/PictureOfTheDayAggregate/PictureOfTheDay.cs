@@ -17,7 +17,7 @@ public sealed class PictureOfTheDay : BaseModel
         string url
     )
     {
-        base.Generate();
+        base.GenerateId();
         Copyright = copyright;
         PictureDate = pictureDate;
         Explanation = explanation;

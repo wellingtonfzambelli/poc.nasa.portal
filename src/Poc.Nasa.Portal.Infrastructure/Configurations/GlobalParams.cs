@@ -13,4 +13,21 @@ public static class GlobalParams
         configuration.GetValue<string>("API_NASA_ADDRESS");
     public static string ApiNasaApiKey(this IConfiguration configuration) =>
         configuration.GetValue<string>("API_NASA_APIKEY");
+
+    // RabbitMQ
+    public static string RabbitVHost(this IConfiguration configuration) =>
+        configuration.GetValue<string>("RABBITMQ_VHOST");
+    public static string RabbitServer(this IConfiguration configuration) =>
+        configuration.GetValue<string>("RABBITMQ_SERVER");
+    public static string RabbitUsername(this IConfiguration configuration) =>
+        configuration.GetValue<string>("RABBITMQ_USERNAME");
+    public static string RabbitPassord(this IConfiguration configuration) =>
+        configuration.GetValue<string>("RABBITMQ_PASSWORD");
+
+    public static string RabbitQueuePictureOfTheDay(this IConfiguration configuration) =>
+        configuration.GetValue<string>("RABBITMQ_PICTURE_OF_THE_DAY_QUEUE");
+    public static string RabbitExchangePictureOfTheDay(this IConfiguration configuration) =>
+        configuration.GetValue<string>("RABBITMQ_PICTURE_OF_THE_DAY_EXCHANGE");
+    public static string RabbitRoutingKeyPictureOfTheDay(this IConfiguration configuration) =>
+        configuration.GetValue<string>("RABBITMQ_PICTURE_OF_THE_DAY_ROUTING_KEY");
 }

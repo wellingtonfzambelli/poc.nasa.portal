@@ -11,6 +11,7 @@ using Poc.Nasa.Portal.App.AutoMapper;
 using Poc.Nasa.Portal.App.HealthCheck;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
+using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 using Poc.Nasa.Portal.Integration.Shared.HttpClientBase;
@@ -64,6 +65,7 @@ builder.Services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, ser
 // HealthCheck
 builder.Services.AddHealthChecks()
     .AddHealthCheckMySql(connection, name: "MySQL")
+    .AddHealthCheckRabbitMQ(rabbitConnectionString: MontarConexaoRabbitMQ(), name: "RabbitMQ")
     .AddCheck<GCInfoHealthCheck>("GC");
 
 // Add services to the container.
@@ -83,6 +85,7 @@ builder.Services.AddScoped<IRequestHandler<AstronomyPictureOfTheDayRequestHandle
 builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AstronomyPictureOfTheDayValidator>());
 builder.Services.AddAutoMapper(typeof(ConfigurationMapping));
 AddClient(builder.Services, _configuration);
+//AddRabbitMQ(builder.Services, _configuration);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
@@ -157,3 +160,13 @@ static void AddClient(IServiceCollection services, IConfiguration config)
             config.ApiNasaApiKey())
         );
 }
+
+static void AddRabbitMQ(IServiceCollection services, IConfiguration config)
+{
+    services.AddScoped<ISetupMessageBroker>(p =>
+        new SetupMessageBroker(config.RabbitServer(), config.RabbitVHost())
+    );
+}
+
+string MontarConexaoRabbitMQ() =>
+    $"amqps://{builder.Configuration["RABBITMQ_USERNAME"]}:{builder.Configuration["RABBITMQ_PASSWORD"]}@{builder.Configuration["RABBITMQ_SERVER"]}/{builder.Configuration["RABBITMQ_VHOST"]}";

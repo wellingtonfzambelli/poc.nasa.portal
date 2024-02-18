@@ -4,6 +4,6 @@ public abstract class BaseModel
 {
     public Guid Id { get; private set; }
 
-    public void Generate() =>
+    public void GenerateId() =>
         Id = Guid.NewGuid();
 }

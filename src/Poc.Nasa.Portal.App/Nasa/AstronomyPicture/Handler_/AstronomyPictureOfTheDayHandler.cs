@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Poc.Nasa.Portal.App.Shared;
 using Poc.Nasa.Portal.Domain.Models.PictureOfTheDayAggregate;
+using Poc.Nasa.Portal.Infrastructure.Configurations;
+using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 
@@ -15,6 +18,8 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
     private readonly IMapper _mapper;
     private readonly ILogger<AstronomyPictureOfTheDayHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ISetupMessageBroker _setupMessageBroker;
+    private readonly IConfiguration _configuration;
 
     public AstronomyPictureOfTheDayHandler
     (
@@ -22,7 +27,9 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
         INasaPortalClient nasaPortalClient,
         IMapper mapper,
         ILogger<AstronomyPictureOfTheDayHandler> logger,
-        IUnitOfWork unitOfWork
+        IUnitOfWork unitOfWork,
+        // ISetupMessageBroker setupMessageBroker,
+        IConfiguration configuration
     )
     {
         _validator = validator;
@@ -30,11 +37,19 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
         _mapper = mapper;
         _logger = logger;
         _unitOfWork = unitOfWork;
+        //_setupMessageBroker = setupMessageBroker;
+        _configuration = configuration;
     }
 
     public async Task<AstronomyPictureOfTheDayResponseDto> Handle(
         AstronomyPictureOfTheDayRequestHandlerDto request, CancellationToken cancellationToken)
     {
+        _setupMessageBroker.Producer(
+            "test",
+            _configuration.RabbitQueuePictureOfTheDay(),
+            _configuration.RabbitExchangePictureOfTheDay(),
+            _configuration.RabbitRoutingKeyPictureOfTheDay());
+
         _logger.LogInformation("info AstronomyPictureOfTheDayHandler");
 
         var response = new AstronomyPictureOfTheDayResponseDto();

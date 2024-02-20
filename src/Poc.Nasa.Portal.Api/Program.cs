@@ -85,7 +85,7 @@ builder.Services.AddScoped<IRequestHandler<AstronomyPictureOfTheDayRequestHandle
 builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AstronomyPictureOfTheDayValidator>());
 builder.Services.AddAutoMapper(typeof(ConfigurationMapping));
 AddClient(builder.Services, _configuration);
-//AddRabbitMQ(builder.Services, _configuration);
+AddRabbitMQ(builder.Services, _configuration);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();

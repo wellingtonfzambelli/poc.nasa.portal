@@ -8,6 +8,7 @@ using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 using Poc.Nasa.Portal.Integration.NasaPortal;
+using System.Text.Json;
 
 namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
 
@@ -28,7 +29,7 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
         IMapper mapper,
         ILogger<AstronomyPictureOfTheDayHandler> logger,
         IUnitOfWork unitOfWork,
-        // ISetupMessageBroker setupMessageBroker,
+        ISetupMessageBroker setupMessageBroker,
         IConfiguration configuration
     )
     {
@@ -37,19 +38,13 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
         _mapper = mapper;
         _logger = logger;
         _unitOfWork = unitOfWork;
-        //_setupMessageBroker = setupMessageBroker;
+        _setupMessageBroker = setupMessageBroker;
         _configuration = configuration;
     }
 
     public async Task<AstronomyPictureOfTheDayResponseDto> Handle(
         AstronomyPictureOfTheDayRequestHandlerDto request, CancellationToken cancellationToken)
     {
-        _setupMessageBroker.Producer(
-            "test",
-            _configuration.RabbitQueuePictureOfTheDay(),
-            _configuration.RabbitExchangePictureOfTheDay(),
-            _configuration.RabbitRoutingKeyPictureOfTheDay());
-
         _logger.LogInformation("info AstronomyPictureOfTheDayHandler");
 
         var response = new AstronomyPictureOfTheDayResponseDto();
@@ -74,23 +69,23 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
             return response;
         }
 
-        await _unitOfWork.PictureOfTheDayRepository.CreateAsync(
-            new PictureOfTheDay(
-                nasaResponseClient.Copyright,
-                nasaResponseClient.Date,
-                nasaResponseClient.Explanation,
-                nasaResponseClient.Hdurl,
-                nasaResponseClient.Title,
-                nasaResponseClient.Url),
-            cancellationToken);
-        await _unitOfWork.SaveAsync(cancellationToken);
+        var picutreOfTheDayDB = new PictureOfTheDay(
+            nasaResponseClient.Copyright,
+            nasaResponseClient.Date,
+            nasaResponseClient.Explanation,
+            nasaResponseClient.Hdurl,
+            nasaResponseClient.Title,
+            nasaResponseClient.Url);
 
-        await PublishQueueAsync(cancellationToken);
+        PublishQueue(picutreOfTheDayDB);
 
         return _mapper.Map<AstronomyPictureOfTheDayResponseDto>(nasaResponseClient);
     }
 
-    private async Task PublishQueueAsync(CancellationToken ct)
-    {
-    }
+    private void PublishQueue(PictureOfTheDay pictureOfTheDay) =>
+        _setupMessageBroker.Producer(
+           JsonSerializer.Serialize(pictureOfTheDay),
+           _configuration.RabbitQueuePictureOfTheDay(),
+           _configuration.RabbitExchangePictureOfTheDay(),
+           _configuration.RabbitRoutingKeyPictureOfTheDay());
 }

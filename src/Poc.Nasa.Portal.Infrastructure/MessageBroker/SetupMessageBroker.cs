@@ -5,7 +5,7 @@ namespace Poc.Nasa.Portal.Infrastructure.MessageBroker;
 
 public sealed class SetupMessageBroker : ISetupMessageBroker
 {
-    private readonly ConnectionFactory _connectionFactory;
+    private readonly IConnectionFactory _connectionFactory;
 
     public SetupMessageBroker(string hostName, string vhost) =>
         _connectionFactory = new ConnectionFactory()
@@ -16,23 +16,19 @@ public sealed class SetupMessageBroker : ISetupMessageBroker
 
     public void Producer(string message, string queue, string exchange, string routingKey)
     {
-        using (var connection = _connectionFactory.CreateConnection())
-        using (var channel = connection.CreateModel())
+        using (IConnection conn = _connectionFactory.CreateConnection())
+        using (IModel channel = conn.CreateModel())
         {
-            channel.QueueDeclare(queue: queue,
-                                 durable: false,
-                                 exclusive: false,
-                                 autoDelete: false,
-                                 arguments: null);
+            channel.ExchangeDeclare(exchange, ExchangeType.Direct, durable: true);
+            channel.QueueDeclare(queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+            channel.QueueBind(queue, exchange, routingKey, null);
+
+            var props = channel.CreateBasicProperties();
+            props.Persistent = true; // or props.DeliveryMode = 2;
 
             var body = Encoding.UTF8.GetBytes(message);
 
-            channel.BasicPublish(exchange: exchange,
-                                 routingKey: routingKey,
-                                 basicProperties: null,
-                                 body: body);
-
-            Console.WriteLine($" Sent: {message}");
+            channel.BasicPublish(exchange, routingKey, props, body);
         }
     }
 

@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
+using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 using Poc.Nasa.Portal.Workers.Consumers.PictureOfTheDay;
 
 namespace Poc.Nasa.Portal.Workers;
@@ -19,8 +21,6 @@ public class Program
 
     public static async Task Main(string[] args)
     {
-        Console.WriteLine("*** Testando o consumo de mensagens com RabbitMQ + Filas ***");
-
         var host = CreateHostBuilder(args).Build();
         await host.RunAsync();
     }
@@ -35,8 +35,11 @@ public class Program
         .ConfigureServices((hostContext, services) =>
         {
             services.AddHostedService<PictureOfTheDayConsumer>();
-            //services.AddScoped<ISetupMessageBroker, SetupMessageBroker>();
+            services.AddScoped<ISetupMessageBroker, SetupMessageBroker>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             AddRabbitMQ(services, Configuration);
+            AddMySQL(services, Configuration);
         });
 
     static void AddRabbitMQ(IServiceCollection services, IConfiguration config) =>
@@ -47,4 +50,11 @@ public class Program
                 config.RabbitUsername(),
                 config.RabbitPassord())
         );
+
+    static void AddMySQL(IServiceCollection services, IConfiguration config)
+    {
+        string connection = config.ConnectionString();
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
+        services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));
+    }
 }

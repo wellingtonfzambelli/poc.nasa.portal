@@ -41,32 +41,9 @@ builder.Host.ConfigureAppConfiguration((hostingContext, configurationBuilder) =>
     _configuration = configurationBuilder.Build();
 });
 
-// Serilog
-builder.Host.UseSerilog((context, configuration) =>
-    configuration.ReadFrom.Configuration(context.Configuration)
-    .MinimumLevel.Information()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
-    .MinimumLevel.Override("System", LogEventLevel.Error)
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
-    .WriteTo.File(
-        path: $"{_path}\\logs\\log.txt",
-        rollingInterval: RollingInterval.Day,
-        outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}")
-    .WriteTo.MySQL(
-        _configuration.ConnectionString(),
-    "EventLog"));
-
-// MySQL
-string connection = _configuration.ConnectionString();
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
-builder.Services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));
-
-// HealthCheck
-builder.Services.AddHealthChecks()
-    .AddHealthCheckMySql(connection, name: "MySQL")
-    .AddHealthCheckRabbitMQ(rabbitConnectionString: MontarConexaoRabbitMQ(), name: "RabbitMQ")
-    .AddCheck<GCInfoHealthCheck>("GC");
+AddSerilog(builder, _path, _configuration);
+AddMySQL(builder, _configuration);
+HealthCheck(builder, _configuration);
 
 // Add services to the container.
 builder.Services.AddControllers(config =>
@@ -77,7 +54,6 @@ builder.Services.AddControllers(config =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServiceCollection(builder.Configuration);
-
 
 // DI
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
@@ -170,5 +146,35 @@ static void AddRabbitMQ(IServiceCollection services, IConfiguration config) =>
             config.RabbitPassord())
     );
 
-string MontarConexaoRabbitMQ() =>
-    $"amqps://{builder.Configuration["RABBITMQ_USERNAME"]}:{builder.Configuration["RABBITMQ_PASSWORD"]}@{builder.Configuration["RABBITMQ_SERVER"]}/{builder.Configuration["RABBITMQ_VHOST"]}";
+static void AddSerilog(WebApplicationBuilder builder, string path, IConfiguration config) =>
+    builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration)
+    .MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+    .MinimumLevel.Override("System", LogEventLevel.Error)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File(
+        path: $"{path}\\logs\\log.txt",
+        rollingInterval: RollingInterval.Day,
+        outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}")
+    .WriteTo.MySQL(
+        config.ConnectionString(),
+    "EventLog"));
+
+static void AddMySQL(WebApplicationBuilder builder, IConfiguration config)
+{
+    string connection = config.ConnectionString();
+    var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
+    builder.Services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));
+}
+
+static void HealthCheck(WebApplicationBuilder builder, IConfiguration config)
+{
+    string rabbitConnection = $"amqps://{builder.Configuration["RABBITMQ_USERNAME"]}:{builder.Configuration["RABBITMQ_PASSWORD"]}@{builder.Configuration["RABBITMQ_SERVER"]}/{builder.Configuration["RABBITMQ_VHOST"]}";
+
+    builder.Services.AddHealthChecks()
+    .AddHealthCheckMySql(config.ConnectionString(), name: "MySQL")
+    .AddHealthCheckRabbitMQ(rabbitConnectionString: rabbitConnection, name: "RabbitMQ")
+    .AddCheck<GCInfoHealthCheck>("GC");
+}

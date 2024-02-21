@@ -161,12 +161,14 @@ static void AddClient(IServiceCollection services, IConfiguration config)
         );
 }
 
-static void AddRabbitMQ(IServiceCollection services, IConfiguration config)
-{
+static void AddRabbitMQ(IServiceCollection services, IConfiguration config) =>
     services.AddScoped<ISetupMessageBroker>(p =>
-        new SetupMessageBroker(config.RabbitServer(), config.RabbitVHost())
+        new SetupMessageBroker(
+            config.RabbitServer(),
+            config.RabbitVHost(),
+            config.RabbitUsername(),
+            config.RabbitPassord())
     );
-}
 
 string MontarConexaoRabbitMQ() =>
     $"amqps://{builder.Configuration["RABBITMQ_USERNAME"]}:{builder.Configuration["RABBITMQ_PASSWORD"]}@{builder.Configuration["RABBITMQ_SERVER"]}/{builder.Configuration["RABBITMQ_VHOST"]}";

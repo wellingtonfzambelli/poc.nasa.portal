@@ -1,4 +1,5 @@
 ﻿using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
 
 namespace Poc.Nasa.Portal.Infrastructure.MessageBroker;
@@ -7,14 +8,16 @@ public sealed class SetupMessageBroker : ISetupMessageBroker
 {
     private readonly IConnectionFactory _connectionFactory;
 
-    public SetupMessageBroker(string hostName, string vhost) =>
+    public SetupMessageBroker(string hostName, string vhost, string userName, string password) =>
         _connectionFactory = new ConnectionFactory()
         {
             HostName = hostName,
-            VirtualHost = vhost
+            VirtualHost = vhost,
+            UserName = userName,
+            Password = password
         };
 
-    public void Producer(string message, string queue, string exchange, string routingKey)
+    public void ProduceMessage(string message, string queue, string exchange, string routingKey)
     {
         using (IConnection conn = _connectionFactory.CreateConnection())
         using (IModel channel = conn.CreateModel())
@@ -24,7 +27,7 @@ public sealed class SetupMessageBroker : ISetupMessageBroker
             channel.QueueBind(queue, exchange, routingKey, null);
 
             var props = channel.CreateBasicProperties();
-            props.Persistent = true; // or props.DeliveryMode = 2;
+            props.Persistent = true;
 
             var body = Encoding.UTF8.GetBytes(message);
 
@@ -32,46 +35,20 @@ public sealed class SetupMessageBroker : ISetupMessageBroker
         }
     }
 
-    //static void Consumer()
-    //{
-    //    var factory = new ConnectionFactory()
-    //    {
-    //        HostName = HOST_NAME,
-    //        VirtualHost = VHOST
-    //    };
+    public string ConsumeMessage(string queue)
+    {
+        using (var connection = _connectionFactory.CreateConnection())
+        using (var channel = connection.CreateModel())
+        {
+            channel.QueueDeclare(queue: queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+            var consumer = new EventingBasicConsumer(channel);
 
-    //    using (var connection = factory.CreateConnection())
-    //    using (var channel = connection.CreateModel())
-    //    {
-    //        channel.QueueDeclare(queue: QUEUE,
-    //                             durable: false,
-    //                             exclusive: false,
-    //                             autoDelete: false,
-    //                             arguments: null);
+            BasicGetResult result = channel.BasicGet(queue, true);
 
-    //        var consumer = new EventingBasicConsumer(channel);
-    //        consumer.Received += (model, ea) =>
-    //        {
-    //            try
-    //            {
-    //                var body = ea.Body.ToArray();
-    //                var message = Encoding.UTF8.GetString(body);
+            if (result == null)
+                return null;
 
-    //                Console.WriteLine($"Received: {message}");
-
-    //                // Remove the message from queue
-    //                channel.BasicAck(ea.DeliveryTag, false);
-    //            }
-    //            catch (Exception ex)
-    //            {
-    //                // Return the message to queue
-    //                channel.BasicNack(ea.DeliveryTag, false, true);
-    //            }
-    //        };
-
-    //        channel.BasicConsume(queue: QUEUE,
-    //                             autoAck: false, // RabbitMQ waiting a confirmation manualy
-    //                             consumer: consumer);
-    //    }
-    //}
+            return Encoding.UTF8.GetString(result.Body.ToArray());
+        }
+    }
 }

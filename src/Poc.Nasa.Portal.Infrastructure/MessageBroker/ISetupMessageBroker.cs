@@ -2,5 +2,6 @@
 
 public interface ISetupMessageBroker
 {
-    void Producer(string message, string queue, string exchange, string routingKey);
+    void ProduceMessage(string message, string queue, string exchange, string routingKey);
+    string ConsumeMessage(string queue);
 }

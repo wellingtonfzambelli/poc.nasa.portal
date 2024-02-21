@@ -83,7 +83,7 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
     }
 
     private void PublishQueue(PictureOfTheDay pictureOfTheDay) =>
-        _setupMessageBroker.Producer(
+        _setupMessageBroker.ProduceMessage(
            JsonSerializer.Serialize(pictureOfTheDay),
            _configuration.RabbitQueuePictureOfTheDay(),
            _configuration.RabbitExchangePictureOfTheDay(),

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
+using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 using Poc.Nasa.Portal.Domain.Models.PictureOfTheDayAggregate;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 

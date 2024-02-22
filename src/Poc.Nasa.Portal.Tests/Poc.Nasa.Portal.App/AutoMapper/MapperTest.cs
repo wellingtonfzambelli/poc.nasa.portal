@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Poc.Nasa.Portal.App.AutoMapper;
-using Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
+using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 
 namespace Poc.Nasa.Portal.Tests.Poc.Nasa.Portal.App.AutoMapper;

@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Poc.Nasa.Portal.Api.Controllers.Base;
-using Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
+using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 using Poc.Nasa.Portal.App.Shared.Dt;
 using System.ComponentModel.DataAnnotations;
 using System.Net;

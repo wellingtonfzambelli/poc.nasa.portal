@@ -1,4 +1,4 @@
-﻿namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
+﻿namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 
 public sealed class AstronomyPictureOfTheDayRequestDto
 {

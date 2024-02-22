@@ -43,12 +43,12 @@ Docker
 
 ElasticSearch
 Sonnar Cube
-Memcache
 Kibana
-
 Identity
 Redis
 BFF
 Api Gateway (Ocelot)
 Angular
+
+Memcache
 Benchmark

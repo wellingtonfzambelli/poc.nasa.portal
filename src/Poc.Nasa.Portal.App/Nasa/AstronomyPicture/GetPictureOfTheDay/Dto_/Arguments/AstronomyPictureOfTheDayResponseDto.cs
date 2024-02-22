@@ -1,6 +1,6 @@
 ﻿using Poc.Nasa.Portal.App.Shared;
 
-namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
+namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 
 public sealed class AstronomyPictureOfTheDayResponseDto : BaseResponseDto
 {

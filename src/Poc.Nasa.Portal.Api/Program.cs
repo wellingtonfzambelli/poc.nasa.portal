@@ -9,7 +9,7 @@ using Poc.Nasa.Portal.Api.Extensions;
 using Poc.Nasa.Portal.Api.Filters;
 using Poc.Nasa.Portal.App.AutoMapper;
 using Poc.Nasa.Portal.App.HealthCheck;
-using Poc.Nasa.Portal.App.Nasa.AstronomyPicture;
+using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;

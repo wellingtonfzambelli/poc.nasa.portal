@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
         services.AddHttpContextAccessor();
         services.AddApisServiceCollection(configuration);
     }
-    
+
     public static IHealthChecksBuilder AddHealthCheckRabbitMQ
     (
         this IHealthChecksBuilder builder,

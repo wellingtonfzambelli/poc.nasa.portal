@@ -51,7 +51,7 @@ public sealed class RabbitMQHealthCheck : IHealthCheck
     }
 
     private void EnsureConnection()
-    
+
     {
         if (_connection == null)
         {

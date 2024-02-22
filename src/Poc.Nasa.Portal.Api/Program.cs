@@ -50,7 +50,6 @@ builder.Services.AddControllers(config =>
 {
     config.Filters.Add(typeof(ExceptionFilter));
 }).AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)));
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServiceCollection(builder.Configuration);
@@ -65,20 +64,15 @@ AddRabbitMQ(builder.Services, _configuration);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment()) // Configure the HTTP request pipeline.
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-
-// HealthCheck
 app.UseHealthChecks("/nasa/v1/health/live", new HealthCheckOptions()
 {
     Predicate = _ => true,
@@ -102,13 +96,6 @@ app.UseHealthChecks("/nasa/v1/health/ready", new HealthCheckOptions()
         return httpContext.Response.WriteAsync(json.ToString(Formatting.Indented));
     }
 });
-
-static Task WriteResponse(HttpContext httpContext, HealthReport result)
-{
-    httpContext.Response.ContentType = "text/plan";
-    return httpContext.Response.WriteAsync(result.Status.ToString());
-}
-
 app.Run();
 
 static void AddClient(IServiceCollection services, IConfiguration config)
@@ -177,4 +164,10 @@ static void HealthCheck(WebApplicationBuilder builder, IConfiguration config)
     .AddHealthCheckMySql(config.ConnectionString(), name: "MySQL")
     .AddHealthCheckRabbitMQ(rabbitConnection, config, name: "RabbitMQ")
     .AddCheck<GCInfoHealthCheck>("GC");
+}
+
+static Task WriteResponse(HttpContext httpContext, HealthReport result)
+{
+    httpContext.Response.ContentType = "text/plan";
+    return httpContext.Response.WriteAsync(result.Status.ToString());
 }

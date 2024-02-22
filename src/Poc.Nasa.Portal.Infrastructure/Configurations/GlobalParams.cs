@@ -17,7 +17,7 @@ public static class GlobalParams
     // RabbitMQ
     public static string RabbitVHost(this IConfiguration configuration) =>
         configuration.GetValue<string>("RABBITMQ_VHOST");
-    public static string RabbitServer(this IConfiguration configuration) =>
+    public static string RabbitHostname(this IConfiguration configuration) =>
         configuration.GetValue<string>("RABBITMQ_SERVER");
     public static string RabbitUsername(this IConfiguration configuration) =>
         configuration.GetValue<string>("RABBITMQ_USERNAME");

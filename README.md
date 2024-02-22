@@ -5,11 +5,11 @@
 Healhcheck
 	ok - mysql
 	ok - memory
-	RabbitMQ
+	ok - RabbitMQ
 	ElasticSearch
 Docker
 	ok - Mysql
-	Rabbit
+	ok - Rabbit
 	ElasticSearch
 Swagger
 	ok	
@@ -30,14 +30,15 @@ EF MySql
 	ok	
 RabbitMQ
 	ok
-
 Third-party
-	in progress
+	ok
+
+
 Unit Test
 	in progress
 Docker
 	ok - Mysql
-	RabbitMQ
+	ok - RabbitMQ
 
 
 ElasticSearch

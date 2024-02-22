@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using Poc.Nasa.Portal.App.Extensions;
 using Poc.Nasa.Portal.App.HealthCheck;
+using Poc.Nasa.Portal.Infrastructure.Configurations;
 using RabbitMQ.Client;
 
 namespace Poc.Nasa.Portal.Api.Extensions;
@@ -13,24 +14,28 @@ public static class ServiceCollectionExtensions
         services.AddHttpContextAccessor();
         services.AddApisServiceCollection(configuration);
     }
-
-    // HealthCheck RabbitMQ
-    private const string RABBIT_NAME = "rabbitmq";
+    
     public static IHealthChecksBuilder AddHealthCheckRabbitMQ
     (
         this IHealthChecksBuilder builder,
         string rabbitConnectionString,
+        IConfiguration configuration,
         SslOption sslOption = null,
         string name = default,
         HealthStatus? failureStatus = default,
-        IEnumerable<string> tags = default,
-        TimeSpan? timeout = default
+        IEnumerable<string> tags = default, TimeSpan? timeout = default
     )
     {
-        builder.Services.AddSingleton(sp => new RabbitMQHealthCheck(sp.GetRequiredService<ConnectionFactory>()));
+        builder.Services.AddSingleton(sp => new RabbitMQHealthCheck(new ConnectionFactory()
+        {
+            UserName = configuration.RabbitUsername(),
+            Password = configuration.RabbitPassord(),
+            VirtualHost = configuration.RabbitVHost(),
+            HostName = configuration.RabbitHostname()
+        }, configuration));
 
         var hc = new HealthCheckRegistration(
-            name ?? RABBIT_NAME,
+            name ?? "rabbitmq",
             sp => sp.GetRequiredService<RabbitMQHealthCheck>(),
             failureStatus,
             tags,

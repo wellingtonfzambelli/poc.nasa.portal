@@ -45,7 +45,7 @@ public class Program
     static void AddRabbitMQ(IServiceCollection services, IConfiguration config) =>
         services.AddScoped<ISetupMessageBroker>(p =>
             new SetupMessageBroker(
-                config.RabbitServer(),
+                config.RabbitHostname(),
                 config.RabbitVHost(),
                 config.RabbitUsername(),
                 config.RabbitPassord())

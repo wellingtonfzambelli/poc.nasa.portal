@@ -140,7 +140,7 @@ static void AddClient(IServiceCollection services, IConfiguration config)
 static void AddRabbitMQ(IServiceCollection services, IConfiguration config) =>
     services.AddScoped<ISetupMessageBroker>(p =>
         new SetupMessageBroker(
-            config.RabbitServer(),
+            config.RabbitHostname(),
             config.RabbitVHost(),
             config.RabbitUsername(),
             config.RabbitPassord())
@@ -175,6 +175,6 @@ static void HealthCheck(WebApplicationBuilder builder, IConfiguration config)
 
     builder.Services.AddHealthChecks()
     .AddHealthCheckMySql(config.ConnectionString(), name: "MySQL")
-    .AddHealthCheckRabbitMQ(rabbitConnectionString: rabbitConnection, name: "RabbitMQ")
+    .AddHealthCheckRabbitMQ(rabbitConnection, config, name: "RabbitMQ")
     .AddCheck<GCInfoHealthCheck>("GC");
 }

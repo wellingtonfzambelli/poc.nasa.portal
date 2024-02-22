@@ -25,4 +25,10 @@
     <ProjectReference Include="..\Poc.Nasa.Portal.Integration\Poc.Nasa.Portal.Integration.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Nasa\AstronomyPicture\GetAllPictureOfTheDay\Dto_\" />
+    <Folder Include="Nasa\AstronomyPicture\GetAllPictureOfTheDay\Handle_\" />
+    <Folder Include="Nasa\AstronomyPicture\GetAllPictureOfTheDay\Validator_\" />
+  </ItemGroup>
+
 </Project>

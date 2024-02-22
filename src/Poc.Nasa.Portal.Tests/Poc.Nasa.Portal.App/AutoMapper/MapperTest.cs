@@ -32,7 +32,7 @@ public sealed class MapperTest
         };
 
         // act
-        var result = mapper.Map<GetPictureOfTheDayResponseClientDto, AstronomyPictureOfTheDayResponseDto>(source);
+        var result = mapper.Map<GetPictureOfTheDayResponseClientDto, GetPictureOfTheDayResponseDto>(source);
 
         // assert
         Assert.NotNull(result);

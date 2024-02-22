@@ -12,22 +12,22 @@ using System.Text.Json;
 
 namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 
-public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyPictureOfTheDayRequestHandlerDto, AstronomyPictureOfTheDayResponseDto>
+public sealed class GetPictureOfTheDayHandler : IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseDto>
 {
-    private readonly AstronomyPictureOfTheDayValidator _validator;
+    private readonly GetPictureOfTheDayValidator _validator;
     private readonly INasaPortalClient _nasaPortalClient;
     private readonly IMapper _mapper;
-    private readonly ILogger<AstronomyPictureOfTheDayHandler> _logger;
+    private readonly ILogger<GetPictureOfTheDayHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ISetupMessageBroker _setupMessageBroker;
     private readonly IConfiguration _configuration;
 
-    public AstronomyPictureOfTheDayHandler
+    public GetPictureOfTheDayHandler
     (
-        AstronomyPictureOfTheDayValidator validator,
+        GetPictureOfTheDayValidator validator,
         INasaPortalClient nasaPortalClient,
         IMapper mapper,
-        ILogger<AstronomyPictureOfTheDayHandler> logger,
+        ILogger<GetPictureOfTheDayHandler> logger,
         IUnitOfWork unitOfWork,
         ISetupMessageBroker setupMessageBroker,
         IConfiguration configuration
@@ -42,12 +42,12 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
         _configuration = configuration;
     }
 
-    public async Task<AstronomyPictureOfTheDayResponseDto> Handle(
-        AstronomyPictureOfTheDayRequestHandlerDto request, CancellationToken cancellationToken)
+    public async Task<GetPictureOfTheDayResponseDto> Handle(
+        GetPictureOfTheDayRequestHandlerDto request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("info AstronomyPictureOfTheDayHandler");
 
-        var response = new AstronomyPictureOfTheDayResponseDto();
+        var response = new GetPictureOfTheDayResponseDto();
 
         if (await _validator.ValidateAsync(request.RequestDto, cancellationToken)
             is var validation && !validation.IsValid)
@@ -58,7 +58,7 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
 
         if (await _unitOfWork.PictureOfTheDayRepository.GetByDateAsync(request.RequestDto.Date, cancellationToken)
             is var pictureDB && pictureDB is not null)
-            return _mapper.Map<AstronomyPictureOfTheDayResponseDto>(pictureDB);
+            return _mapper.Map<GetPictureOfTheDayResponseDto>(pictureDB);
 
         if (await _nasaPortalClient.GetPictureOfTheDayAsync(request.RequestDto.Date, request.TrackId, cancellationToken)
             is var nasaResponseClient && !nasaResponseClient.IsValid())
@@ -79,7 +79,7 @@ public sealed class AstronomyPictureOfTheDayHandler : IRequestHandler<AstronomyP
 
         PublishQueue(picutreOfTheDayDB);
 
-        return _mapper.Map<AstronomyPictureOfTheDayResponseDto>(nasaResponseClient);
+        return _mapper.Map<GetPictureOfTheDayResponseDto>(nasaResponseClient);
     }
 
     private void PublishQueue(PictureOfTheDay pictureOfTheDay) =>

@@ -17,7 +17,7 @@ public sealed class AstronomyPictureController : AstronomyBaseController
 
     [HttpGet]
     [Route("info/{date}")]
-    [ProducesResponseType(typeof(AstronomyPictureOfTheDayResponseDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GetPictureOfTheDayResponseDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(BadRequestDto), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> GetPictureByDateAsync
     (
@@ -27,8 +27,8 @@ public sealed class AstronomyPictureController : AstronomyBaseController
     )
     {
         var response = base.Mediator.Send(
-            new AstronomyPictureOfTheDayRequestHandlerDto(
-                new AstronomyPictureOfTheDayRequestDto { Date = date },
+            new GetPictureOfTheDayRequestHandlerDto(
+                new GetPictureOfTheDayRequestDto { Date = date },
                 trackId),
             ct);
 

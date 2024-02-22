@@ -56,8 +56,8 @@ builder.Services.AddServiceCollection(builder.Configuration);
 
 // DI
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddScoped<IRequestHandler<AstronomyPictureOfTheDayRequestHandlerDto, AstronomyPictureOfTheDayResponseDto>, AstronomyPictureOfTheDayHandler>();
-builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AstronomyPictureOfTheDayValidator>());
+builder.Services.AddScoped<IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseDto>, GetPictureOfTheDayHandler>();
+builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetPictureOfTheDayValidator>());
 builder.Services.AddAutoMapper(typeof(ConfigurationMapping));
 AddClient(builder.Services, _configuration);
 AddRabbitMQ(builder.Services, _configuration);

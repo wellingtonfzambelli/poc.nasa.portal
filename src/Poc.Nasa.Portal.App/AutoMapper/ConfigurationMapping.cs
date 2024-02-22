@@ -9,7 +9,7 @@ public sealed class ConfigurationMapping : Profile
 {
     public ConfigurationMapping()
     {
-        CreateMap<GetPictureOfTheDayResponseClientDto, AstronomyPictureOfTheDayResponseDto>()
+        CreateMap<GetPictureOfTheDayResponseClientDto, GetPictureOfTheDayResponseDto>()
             .ForMember(dest => dest.Hdurl, opt => opt.MapFrom(src => src.Hdurl))
             .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date))
             .ForMember(dest => dest.Copyright, opt => opt.MapFrom(src => src.Copyright))
@@ -17,7 +17,7 @@ public sealed class ConfigurationMapping : Profile
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
             .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Url));
 
-        CreateMap<PictureOfTheDay, AstronomyPictureOfTheDayResponseDto>()
+        CreateMap<PictureOfTheDay, GetPictureOfTheDayResponseDto>()
             .ForMember(dest => dest.Hdurl, opt => opt.MapFrom(src => src.HdUrl))
             .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.PictureDate))
             .ForMember(dest => dest.Copyright, opt => opt.MapFrom(src => src.Copyright))

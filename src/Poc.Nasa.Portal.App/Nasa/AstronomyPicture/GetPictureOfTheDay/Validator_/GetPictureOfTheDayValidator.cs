@@ -3,9 +3,9 @@ using Poc.Nasa.Portal.Infrastructure.Configurations;
 
 namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 
-public sealed class AstronomyPictureOfTheDayValidator : AbstractValidator<AstronomyPictureOfTheDayRequestDto>
+public sealed class GetPictureOfTheDayValidator : AbstractValidator<GetPictureOfTheDayRequestDto>
 {
-    public AstronomyPictureOfTheDayValidator() =>
+    public GetPictureOfTheDayValidator() =>
         RuleFor(s => s.Date)
             .Must(ValidateDateGreaterThan).WithErrorCode(MessageValidation.DateLessThan.code)
                                           .WithMessage(MessageValidation.DateLessThan.description);

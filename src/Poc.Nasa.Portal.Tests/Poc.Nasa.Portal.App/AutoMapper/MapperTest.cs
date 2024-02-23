@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Poc.Nasa.Portal.App.AutoMapper;
-using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetAllPictureOfTheDay;
+using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 
 namespace Poc.Nasa.Portal.Tests.Poc.Nasa.Portal.App.AutoMapper;
@@ -32,7 +32,7 @@ public sealed class MapperTest
         };
 
         // act
-        var result = mapper.Map<GetPictureOfTheDayResponseClientDto, GetAllPictureOfTheDayResponseDto>(source);
+        var result = mapper.Map<GetPictureOfTheDayResponseClientDto, GetPictureOfTheDayResponseHandlerDto>(source);
 
         // assert
         Assert.NotNull(result);

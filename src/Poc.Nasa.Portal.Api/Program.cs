@@ -11,6 +11,7 @@ using Poc.Nasa.Portal.App.AutoMapper;
 using Poc.Nasa.Portal.App.HealthCheck;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetAllPictureOfTheDay;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
+using Poc.Nasa.Portal.Infrastructure.Cache;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
@@ -44,7 +45,7 @@ builder.Host.ConfigureAppConfiguration((hostingContext, configurationBuilder) =>
 
 AddSerilog(builder, _path, _configuration);
 AddMySQL(builder, _configuration);
-HealthCheck(builder, _configuration);
+AddHealthCheck(builder, _configuration);
 
 // Add services to the container.
 builder.Services.AddControllers(config =>
@@ -57,12 +58,14 @@ builder.Services.AddServiceCollection(builder.Configuration);
 
 // DI
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddScoped<ICacheService, CacheService>();
 builder.Services.AddScoped<IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseHandlerDto>, GetPictureOfTheDayHandler>();
 builder.Services.AddScoped<IRequestHandler<GetAllPictureOfTheDayRequestHandlerDto, GetAllPictureOfTheDayResponseHandlerDto>, GetAllPictureOfTheDayHandler>();
 builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetPictureOfTheDayValidator>());
 builder.Services.AddAutoMapper(typeof(ConfigurationMapping));
 AddClient(builder.Services, _configuration);
 AddRabbitMQ(builder.Services, _configuration);
+AddRedis(builder, _configuration);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
@@ -158,7 +161,7 @@ static void AddMySQL(WebApplicationBuilder builder, IConfiguration config)
     builder.Services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));
 }
 
-static void HealthCheck(WebApplicationBuilder builder, IConfiguration config)
+static void AddHealthCheck(WebApplicationBuilder builder, IConfiguration config)
 {
     string rabbitConnection = $"amqps://{builder.Configuration["RABBITMQ_USERNAME"]}:{builder.Configuration["RABBITMQ_PASSWORD"]}@{builder.Configuration["RABBITMQ_SERVER"]}/{builder.Configuration["RABBITMQ_VHOST"]}";
 
@@ -166,6 +169,15 @@ static void HealthCheck(WebApplicationBuilder builder, IConfiguration config)
     .AddHealthCheckMySql(config.ConnectionString(), name: "MySQL")
     .AddHealthCheckRabbitMQ(rabbitConnection, config, name: "RabbitMQ")
     .AddCheck<GCInfoHealthCheck>("GC");
+}
+
+static void AddRedis(WebApplicationBuilder builder, IConfiguration config)
+{
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = config.RedisServer();
+        options.InstanceName = "RedisInstance";
+    });
 }
 
 static Task WriteResponse(HttpContext httpContext, HealthReport result)

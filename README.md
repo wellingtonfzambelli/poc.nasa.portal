@@ -41,14 +41,14 @@ Docker
 	ok - RabbitMQ
 
 
+Redis (redisinsight)
 ElasticSearch
-Sonnar Cube
 Kibana
 Identity
-Redis
 BFF
 Api Gateway (Ocelot)
 Angular
 
+Sonnar Cube
 Memcache
 Benchmark

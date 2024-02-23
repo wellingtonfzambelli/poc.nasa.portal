@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Poc.Nasa.Portal.App.Shared;
 using Poc.Nasa.Portal.Domain.Models.PictureOfTheDayAggregate;
+using Poc.Nasa.Portal.Infrastructure.Cache;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
@@ -16,6 +17,7 @@ public sealed class GetPictureOfTheDayHandler : IRequestHandler<GetPictureOfTheD
 {
     private readonly GetPictureOfTheDayValidator _validator;
     private readonly INasaPortalClient _nasaPortalClient;
+    private readonly ICacheService _cacheService;
     private readonly IMapper _mapper;
     private readonly ILogger<GetPictureOfTheDayHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
@@ -26,6 +28,7 @@ public sealed class GetPictureOfTheDayHandler : IRequestHandler<GetPictureOfTheD
     (
         GetPictureOfTheDayValidator validator,
         INasaPortalClient nasaPortalClient,
+        ICacheService cacheService,
         IMapper mapper,
         ILogger<GetPictureOfTheDayHandler> logger,
         IUnitOfWork unitOfWork,
@@ -35,6 +38,7 @@ public sealed class GetPictureOfTheDayHandler : IRequestHandler<GetPictureOfTheD
     {
         _validator = validator;
         _nasaPortalClient = nasaPortalClient;
+        _cacheService = cacheService;
         _mapper = mapper;
         _logger = logger;
         _unitOfWork = unitOfWork;

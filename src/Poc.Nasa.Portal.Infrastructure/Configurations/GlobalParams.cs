@@ -14,6 +14,10 @@ public static class GlobalParams
     public static string ApiNasaApiKey(this IConfiguration configuration) =>
         configuration.GetValue<string>("API_NASA_APIKEY");
 
+    // Redis
+    public static string RedisServer(this IConfiguration configuration) =>
+        configuration.GetValue<string>("REDIS_SERVER");
+
     // RabbitMQ
     public static string RabbitVHost(this IConfiguration configuration) =>
         configuration.GetValue<string>("RABBITMQ_VHOST");

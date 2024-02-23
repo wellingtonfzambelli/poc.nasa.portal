@@ -2,7 +2,7 @@
 
 namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 
-public sealed class GetPictureOfTheDayResponseDto : BaseResponseDto
+public sealed class GetPictureOfTheDayResponseHandlerDto : BaseResponseDto
 {
     public string Copyright { get; set; }
     public DateTime Date { get; set; }

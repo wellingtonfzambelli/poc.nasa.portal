@@ -2,7 +2,7 @@
 
 namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 
-public sealed class GetPictureOfTheDayRequestHandlerDto : IRequest<GetPictureOfTheDayResponseDto>
+public sealed class GetPictureOfTheDayRequestHandlerDto : IRequest<GetPictureOfTheDayResponseHandlerDto>
 {
     public GetPictureOfTheDayRequestHandlerDto(GetPictureOfTheDayRequestDto request, Guid trackId)
     {

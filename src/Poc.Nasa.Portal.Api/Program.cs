@@ -9,6 +9,7 @@ using Poc.Nasa.Portal.Api.Extensions;
 using Poc.Nasa.Portal.Api.Filters;
 using Poc.Nasa.Portal.App.AutoMapper;
 using Poc.Nasa.Portal.App.HealthCheck;
+using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetAllPictureOfTheDay;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
@@ -56,7 +57,8 @@ builder.Services.AddServiceCollection(builder.Configuration);
 
 // DI
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddScoped<IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseDto>, GetPictureOfTheDayHandler>();
+builder.Services.AddScoped<IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseHandlerDto>, GetPictureOfTheDayHandler>();
+builder.Services.AddScoped<IRequestHandler<GetAllPictureOfTheDayRequestHandlerDto, GetAllPictureOfTheDayResponseHandlerDto>, GetAllPictureOfTheDayHandler>();
 builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetPictureOfTheDayValidator>());
 builder.Services.AddAutoMapper(typeof(ConfigurationMapping));
 AddClient(builder.Services, _configuration);

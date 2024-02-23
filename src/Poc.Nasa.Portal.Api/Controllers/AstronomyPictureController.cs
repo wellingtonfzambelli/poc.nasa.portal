@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Poc.Nasa.Portal.Api.Controllers.Base;
+using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetAllPictureOfTheDay;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 using Poc.Nasa.Portal.App.Shared.Dt;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,7 @@ public sealed class AstronomyPictureController : AstronomyBaseController
 
     [HttpGet]
     [Route("info/{date}")]
-    [ProducesResponseType(typeof(GetPictureOfTheDayResponseDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GetPictureOfTheDayResponseHandlerDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(BadRequestDto), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> GetPictureByDateAsync
     (
@@ -30,6 +31,26 @@ public sealed class AstronomyPictureController : AstronomyBaseController
             new GetPictureOfTheDayRequestHandlerDto(
                 new GetPictureOfTheDayRequestDto { Date = date },
                 trackId),
+            ct);
+
+        if (response.Result.IsValid())
+            return Ok(response.Result);
+
+        return BadRequest(response.Result.GetErrors());
+    }
+
+    [HttpGet]
+    [Route("info")]
+    [ProducesResponseType(typeof(GetAllPictureOfTheDayResponseHandlerDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BadRequestDto), (int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> GetAllPicturesAsync
+    (
+        [FromHeader(Name = TrackId)][Required] Guid trackId,
+        CancellationToken ct
+    )
+    {
+        var response = base.Mediator.Send(
+            new GetAllPictureOfTheDayRequestHandlerDto(trackId),
             ct);
 
         if (response.Result.IsValid())

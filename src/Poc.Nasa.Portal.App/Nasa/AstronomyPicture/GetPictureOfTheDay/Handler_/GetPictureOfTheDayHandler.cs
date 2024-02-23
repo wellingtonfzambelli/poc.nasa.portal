@@ -12,7 +12,7 @@ using System.Text.Json;
 
 namespace Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 
-public sealed class GetPictureOfTheDayHandler : IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseDto>
+public sealed class GetPictureOfTheDayHandler : IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseHandlerDto>
 {
     private readonly GetPictureOfTheDayValidator _validator;
     private readonly INasaPortalClient _nasaPortalClient;
@@ -42,12 +42,12 @@ public sealed class GetPictureOfTheDayHandler : IRequestHandler<GetPictureOfTheD
         _configuration = configuration;
     }
 
-    public async Task<GetPictureOfTheDayResponseDto> Handle(
+    public async Task<GetPictureOfTheDayResponseHandlerDto> Handle(
         GetPictureOfTheDayRequestHandlerDto request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("info AstronomyPictureOfTheDayHandler");
 
-        var response = new GetPictureOfTheDayResponseDto();
+        var response = new GetPictureOfTheDayResponseHandlerDto();
 
         if (await _validator.ValidateAsync(request.RequestDto, cancellationToken)
             is var validation && !validation.IsValid)
@@ -58,7 +58,7 @@ public sealed class GetPictureOfTheDayHandler : IRequestHandler<GetPictureOfTheD
 
         if (await _unitOfWork.PictureOfTheDayRepository.GetByDateAsync(request.RequestDto.Date, cancellationToken)
             is var pictureDB && pictureDB is not null)
-            return _mapper.Map<GetPictureOfTheDayResponseDto>(pictureDB);
+            return _mapper.Map<GetPictureOfTheDayResponseHandlerDto>(pictureDB);
 
         if (await _nasaPortalClient.GetPictureOfTheDayAsync(request.RequestDto.Date, request.TrackId, cancellationToken)
             is var nasaResponseClient && !nasaResponseClient.IsValid())
@@ -79,7 +79,7 @@ public sealed class GetPictureOfTheDayHandler : IRequestHandler<GetPictureOfTheD
 
         PublishQueue(picutreOfTheDayDB);
 
-        return _mapper.Map<GetPictureOfTheDayResponseDto>(nasaResponseClient);
+        return _mapper.Map<GetPictureOfTheDayResponseHandlerDto>(nasaResponseClient);
     }
 
     private void PublishQueue(PictureOfTheDay pictureOfTheDay) =>

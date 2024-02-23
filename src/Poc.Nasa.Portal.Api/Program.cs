@@ -168,6 +168,7 @@ static void AddHealthCheck(WebApplicationBuilder builder, IConfiguration config)
     builder.Services.AddHealthChecks()
     .AddHealthCheckMySql(config.ConnectionString(), name: "MySQL")
     .AddHealthCheckRabbitMQ(rabbitConnection, config, name: "RabbitMQ")
+    .AddRedis(config.RedisServer(), "Redis", HealthStatus.Degraded)
     .AddCheck<GCInfoHealthCheck>("GC");
 }
 

@@ -48,7 +48,12 @@ public sealed class PictureOfTheDayConsumer : IHostedService
 
                 var pictureOfTheDayMsg = JsonSerializer.Deserialize<PictureOfTheDayMsg>(message);
 
+                if (await _unitOfWork.PictureOfTheDayRepository.GetByDateAsync(pictureOfTheDayMsg.PictureDate, cancellationToken)
+                    is var pictureDB && pictureDB is not null)
+                    continue;
+
                 Guid pictureId = await SaveOnDatabaseAsync(pictureOfTheDayMsg, cancellationToken);
+                
                 await _cacheService.SetAsync(pictureId.ToString(), message, cancellationToken);
             }
             catch (Exception ex)

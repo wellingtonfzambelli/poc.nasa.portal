@@ -6,6 +6,7 @@ Healhcheck
 	ok - mysql
 	ok - memory
 	ok - RabbitMQ
+	ok - Redis
 	ElasticSearch
 Docker
 	ok - Mysql
@@ -33,7 +34,8 @@ RabbitMQ
 Third-party
 	ok
 
-
+Redis (redisinsight)
+	in progress
 Unit Test
 	in progress
 Docker
@@ -41,7 +43,7 @@ Docker
 	ok - RabbitMQ
 
 
-Redis (redisinsight)
+
 ElasticSearch
 Kibana
 Identity

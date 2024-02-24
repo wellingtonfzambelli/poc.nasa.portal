@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Poc.Nasa.Portal.Domain.Shared;
+using Poc.Nasa.Portal.Infrastructure.Cache;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker.Messages;
@@ -9,47 +10,58 @@ using System.Text.Json;
 
 namespace Poc.Nasa.Portal.Workers.Consumers.PictureOfTheDay;
 
-public sealed class PictureOfTheDayConsumer : BackgroundService
+public sealed class PictureOfTheDayConsumer : IHostedService
 {
     private readonly ISetupMessageBroker _setupMessageBroker;
+    private readonly ICacheService _cacheService;
     private readonly IConfiguration _configuration;
     private readonly IUnitOfWork _unitOfWork;
 
     public PictureOfTheDayConsumer
     (
         IConfiguration configuration,
+        ICacheService cacheService,
         ISetupMessageBroker setupMessageBroker,
         IUnitOfWork unitOfWork
     )
     {
         _setupMessageBroker = setupMessageBroker;
+        _cacheService = cacheService;
         _configuration = configuration;
         _unitOfWork = unitOfWork;
     }
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    public async Task StartAsync(CancellationToken cancellationToken)
     {
-        Console.WriteLine("Getting message...");
-
-        try
+        while (true)
         {
-            if (_setupMessageBroker.ConsumeMessage(_configuration.RabbitQueuePictureOfTheDay())
-                is var message && message is null)
-                return;
+            Console.WriteLine($"### Proccess executing {DateTime.Now} ###");
 
-            var pictureOfTheDayMsg = JsonSerializer.Deserialize<PictureOfTheDayMsg>(message);
+            try
+            {
+                if (_setupMessageBroker.ConsumeMessage(_configuration.RabbitQueuePictureOfTheDay())
+                    is var message && message is null)
+                {
+                    await Task.Delay(_configuration.WaitInMillisecondsConsumer());
+                    continue;
+                }
 
-            await SaveAsync(pictureOfTheDayMsg, stoppingToken);
+                var pictureOfTheDayMsg = JsonSerializer.Deserialize<PictureOfTheDayMsg>(message);
 
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Something wrong {ex.Message}");
+                Guid pictureId = await SaveOnDatabaseAsync(pictureOfTheDayMsg, cancellationToken);
+                await _cacheService.SetAsync(pictureId.ToString(), message, cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Something wrong {ex.Message}");
+            }
         }
     }
 
-    private async Task SaveAsync(PictureOfTheDayMsg msg, CancellationToken ct)
+    private async Task<Guid> SaveOnDatabaseAsync(PictureOfTheDayMsg msg, CancellationToken ct)
     {
+        Console.WriteLine("Saving on the database");
+
         var picture = new Domain.Models.PictureOfTheDayAggregate.PictureOfTheDay
                 (
                     msg.Copyright,
@@ -62,5 +74,13 @@ public sealed class PictureOfTheDayConsumer : BackgroundService
 
         await _unitOfWork.PictureOfTheDayRepository.CreateAsync(picture, ct);
         await _unitOfWork.SaveAsync(ct);
+
+        return picture.Id;
+    }
+
+    public async Task StopAsync(CancellationToken cancellationToken)
+    {
+        Console.WriteLine("### Proccess stoping ###");
+        Console.WriteLine($"{DateTime.Now}");
     }
 }

@@ -34,4 +34,8 @@ public static class GlobalParams
         configuration.GetValue<string>("RABBITMQ_PICTURE_OF_THE_DAY_EXCHANGE");
     public static string RabbitRoutingKeyPictureOfTheDay(this IConfiguration configuration) =>
         configuration.GetValue<string>("RABBITMQ_PICTURE_OF_THE_DAY_ROUTING_KEY");
+
+    // Consumer - PictureOfTheDay
+    public static int WaitInMillisecondsConsumer(this IConfiguration configuration) =>
+        configuration.GetValue<int>("CONSUMER_WAIT_IN_MILLISECONDS");
 }

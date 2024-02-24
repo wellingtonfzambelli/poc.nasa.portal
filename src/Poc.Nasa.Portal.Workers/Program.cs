@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Poc.Nasa.Portal.Infrastructure.Cache;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
@@ -37,9 +38,11 @@ public class Program
             services.AddHostedService<PictureOfTheDayConsumer>();
             services.AddScoped<ISetupMessageBroker, SetupMessageBroker>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICacheService, CacheService>();
 
             AddRabbitMQ(services, Configuration);
             AddMySQL(services, Configuration);
+            AddRedis(services, Configuration);
         });
 
     static void AddRabbitMQ(IServiceCollection services, IConfiguration config) =>
@@ -56,5 +59,14 @@ public class Program
         string connection = config.ConnectionString();
         var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
         services.AddDbContext<NasaPortalContext>(o => o.UseMySql(connection, serverVersion));
+    }
+
+    static void AddRedis(IServiceCollection services, IConfiguration config)
+    {
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = config.RedisServer();
+            options.InstanceName = "RedisInstance";
+        });
     }
 }

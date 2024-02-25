@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Poc.Nasa.Portal.App.Shared;
 using Poc.Nasa.Portal.Domain.Models.PictureOfTheDayAggregate;
 using Poc.Nasa.Portal.Infrastructure.Cache;
+using Poc.Nasa.Portal.Infrastructure.Cache.Model;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;

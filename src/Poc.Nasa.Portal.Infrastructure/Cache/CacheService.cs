@@ -1,24 +1,20 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using Redis.OM;
 
 namespace Poc.Nasa.Portal.Infrastructure.Cache;
 
 public sealed class CacheService : ICacheService
 {
-    private readonly IDistributedCache _cache;
-    private readonly DistributedCacheEntryOptions _options;
+    private readonly RedisConnectionProvider _provider;
 
-    public CacheService(IDistributedCache cache)
+    public CacheService(RedisConnectionProvider provider) =>
+        _provider = provider;
+
+    public async Task InsertAsync<T>(T type, CancellationToken ct) where T : class
     {
-        _cache = cache;
-        _options = new DistributedCacheEntryOptions
-        {
-
-        };
+        var collection = _provider.RedisCollection<T>();
+        await collection.InsertAsync(type);
     }
 
-    public async Task<string> GetAsync(string key, CancellationToken ct) =>
-        await _cache.GetStringAsync(key, ct);
-
-    public async Task SetAsync(string key, string value, CancellationToken ct) =>
-        await _cache.SetStringAsync(key, value, _options, ct);
+    public async Task SetAsync(string key, string value, CancellationToken ct)
+    { }
 }

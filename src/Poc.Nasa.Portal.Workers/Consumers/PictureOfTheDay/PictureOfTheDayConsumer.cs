@@ -53,7 +53,7 @@ public sealed class PictureOfTheDayConsumer : IHostedService
                     continue;
 
                 Guid pictureId = await SaveOnDatabaseAsync(pictureOfTheDayMsg, cancellationToken);
-                
+
                 await _cacheService.SetAsync(pictureId.ToString(), message, cancellationToken);
             }
             catch (Exception ex)

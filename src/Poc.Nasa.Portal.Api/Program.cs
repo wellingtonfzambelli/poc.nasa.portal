@@ -17,6 +17,7 @@ using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 using Poc.Nasa.Portal.Integration.NasaPortal;
 using Poc.Nasa.Portal.Integration.Shared.HttpClientBase;
+using Redis.OM;
 using Serilog;
 using Serilog.Events;
 using System.Net.Http.Headers;
@@ -168,17 +169,14 @@ static void AddHealthCheck(WebApplicationBuilder builder, IConfiguration config)
     builder.Services.AddHealthChecks()
     .AddHealthCheckMySql(config.ConnectionString(), name: "MySQL")
     .AddHealthCheckRabbitMQ(rabbitConnection, config, name: "RabbitMQ")
-    .AddRedis(config.RedisServer(), "Redis", HealthStatus.Degraded)
+    .AddRedis(config.RedisServer().Replace("redis://", ""), "Redis", HealthStatus.Degraded)
     .AddCheck<GCInfoHealthCheck>("GC");
 }
 
 static void AddRedis(WebApplicationBuilder builder, IConfiguration config)
 {
-    builder.Services.AddStackExchangeRedisCache(options =>
-    {
-        options.Configuration = config.RedisServer();
-        options.InstanceName = "RedisInstance";
-    });
+    var provider = new RedisConnectionProvider(config.RedisServer());
+    builder.Services.AddSingleton(provider);
 }
 
 static Task WriteResponse(HttpContext httpContext, HealthReport result)

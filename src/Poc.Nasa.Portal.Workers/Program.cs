@@ -8,6 +8,7 @@ using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 using Poc.Nasa.Portal.Workers.Consumers.PictureOfTheDay;
+using Redis.OM;
 
 namespace Poc.Nasa.Portal.Workers;
 
@@ -63,10 +64,7 @@ public class Program
 
     static void AddRedis(IServiceCollection services, IConfiguration config)
     {
-        services.AddStackExchangeRedisCache(options =>
-        {
-            options.Configuration = config.RedisServer();
-            options.InstanceName = "RedisInstance";
-        });
+        var provider = new RedisConnectionProvider(config.RedisServer());
+        services.AddSingleton(provider);
     }
 }

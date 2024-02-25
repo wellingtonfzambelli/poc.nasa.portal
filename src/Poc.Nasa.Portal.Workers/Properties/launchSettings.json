@@ -7,7 +7,7 @@
         "CONNECTIONSTRING": "server=127.0.0.1;User Id=root;password=root;Persist Security Info=True;database=nasaportal;",
         //"CONNECTIONSTRING": "Host=localhost;port=30001;User Id=test_user;password=test_password;Persist Security Info=True;database=nasaportal;"
 
-        "REDIS_SERVER": "localhost:6379",
+        "REDIS_SERVER": "redis://localhost:6379",
 
         "RABBITMQ_SERVER": "localhost",
         "RABBITMQ_USERNAME": "guest",

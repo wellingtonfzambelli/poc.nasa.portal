@@ -9,12 +9,9 @@ public sealed class CacheService : ICacheService
     public CacheService(RedisConnectionProvider provider) =>
         _provider = provider;
 
-    public async Task InsertAsync<T>(T type, CancellationToken ct) where T : class
+    public async Task InsertAsync<T>(T type) where T : class
     {
         var collection = _provider.RedisCollection<T>();
         await collection.InsertAsync(type);
     }
-
-    public async Task SetAsync(string key, string value, CancellationToken ct)
-    { }
 }

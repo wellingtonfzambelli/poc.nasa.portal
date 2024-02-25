@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using Poc.Nasa.Portal.Domain.Shared;
 using Poc.Nasa.Portal.Infrastructure.Cache;
+using Poc.Nasa.Portal.Infrastructure.Cache.Model;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker.Messages;
@@ -54,7 +55,17 @@ public sealed class PictureOfTheDayConsumer : IHostedService
 
                 Guid pictureId = await SaveOnDatabaseAsync(pictureOfTheDayMsg, cancellationToken);
 
-                await _cacheService.SetAsync(pictureId.ToString(), message, cancellationToken);
+                await _cacheService.InsertAsync<PictureOfTheDayRedis>(
+                    new PictureOfTheDayRedis
+                    {
+                        Id = pictureId,
+                        HdUrl = pictureOfTheDayMsg.HdUrl,
+                        Copyright = pictureOfTheDayMsg.Copyright,
+                        Explanation = pictureOfTheDayMsg.Explanation,
+                        PictureDate = pictureOfTheDayMsg.PictureDate,
+                        Title = pictureOfTheDayMsg.Title,
+                        Url = pictureOfTheDayMsg.Url
+                    });
             }
             catch (Exception ex)
             {

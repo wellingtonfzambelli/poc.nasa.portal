@@ -40,7 +40,7 @@ public sealed class GetAllPictureOfTheDayHandler : IRequestHandler<GetAllPicture
                 MessageValidation.NoDataFound.code,
                 MessageValidation.NoDataFound.description));
 
-            return response;
+            return response; 
         }
 
         response.PicturesOfTheDay = _mapper.Map<IList<PictureOfTheDay>, IList<GetAllPictureOfTheDayResponseDto>>(picture);

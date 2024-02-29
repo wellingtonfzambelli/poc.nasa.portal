@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.Nasa.Portal.Tests", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.Nasa.Portal.Domain", "..\Poc.Nasa.Portal.Domain\Poc.Nasa.Portal.Domain.csproj", "{D8F3FD37-65F0-4226-BB6B-BD3851481865}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.Nasa.Portal.Workers", "..\Poc.Nasa.Portal.Workers\Poc.Nasa.Portal.Workers.csproj", "{4F26A38D-4FEC-47F2-AEB7-523D0C01459B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.Nasa.Portal.Workers", "..\Poc.Nasa.Portal.Workers\Poc.Nasa.Portal.Workers.csproj", "{4F26A38D-4FEC-47F2-AEB7-523D0C01459B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{DE339721-47B6-417A-882D-6AE12EF73087}"
 EndProject

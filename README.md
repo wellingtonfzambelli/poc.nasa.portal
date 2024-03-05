@@ -41,7 +41,9 @@ Unit Test
 Docker
 	ok - Mysql
 	ok - RabbitMQ
-
+Angular
+	in progress
+Bootstrap
 
 
 ElasticSearch
@@ -49,7 +51,7 @@ Kibana
 Identity
 BFF
 Api Gateway (Ocelot)
-Angular
+
 
 Sonnar Cube
 Memcache

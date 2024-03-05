@@ -10,7 +10,7 @@ using System.Net;
 namespace Poc.Nasa.Portal.Api.Controllers;
 
 [ApiController]
-[Route("astronomy-picture/v1")]
+[Route("nasa/v1")]
 public sealed class AstronomyPictureController : AstronomyBaseController
 {
     public AstronomyPictureController(IMediator mediator) : base(mediator)
@@ -54,7 +54,7 @@ public sealed class AstronomyPictureController : AstronomyBaseController
             ct);
 
         if (response.Result.IsValid())
-            return Ok(response.Result);
+            return Ok(response.Result.PicturesOfTheDay);
 
         return BadRequest(response.Result.GetErrors());
     }

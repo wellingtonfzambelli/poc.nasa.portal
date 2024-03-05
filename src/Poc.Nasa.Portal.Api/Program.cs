@@ -69,6 +69,15 @@ AddRabbitMQ(builder.Services, _configuration);
 AddRedis(builder, _configuration);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+// CORS
+string corsName = "corsapp";
+builder.Services.AddCors(p => p.AddPolicy(corsName, builder =>
+{
+    builder.WithOrigins("*")
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+}));
+
 var app = builder.Build();
 if (app.Environment.IsDevelopment()) // Configure the HTTP request pipeline.
 {
@@ -79,6 +88,7 @@ app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors(corsName);
 app.UseHealthChecks("/nasa/v1/health/live", new HealthCheckOptions()
 {
     Predicate = _ => true,
@@ -142,18 +152,17 @@ static void AddRabbitMQ(IServiceCollection services, IConfiguration config) =>
 static void AddSerilog(WebApplicationBuilder builder, string path, IConfiguration config) =>
     builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
-    .MinimumLevel.Information()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
-    .MinimumLevel.Override("System", LogEventLevel.Error)
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
-    .WriteTo.File(
-        path: $"{path}\\logs\\log.txt",
-        rollingInterval: RollingInterval.Day,
-        outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}")
-    .WriteTo.MySQL(
-        config.ConnectionString(),
-    "EventLog"));
+    //.MinimumLevel.Information()
+    //.MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+    //.MinimumLevel.Override("System", LogEventLevel.Error)
+    //.Enrich.FromLogContext()
+    //.WriteTo.Console()
+    //.WriteTo.File(
+    //    path: $"{path}\\logs\\log.txt",
+    //    rollingInterval: RollingInterval.Day,
+    //    outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}")
+    //.WriteTo.MySQL(config.ConnectionString(), "EventLog")
+    );
 
 static void AddMySQL(WebApplicationBuilder builder, IConfiguration config)
 {

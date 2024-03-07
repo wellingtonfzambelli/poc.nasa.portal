@@ -7,7 +7,7 @@
             <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
         </div>
 
-        <input type="text" class="form-control" aria-label="Search" aria-describedby="inputGroup-sizing-default">
+        <input type="text" (input)="search($event)" class="form-control" aria-label="Search" aria-describedby="inputGroup-sizing-default">
     </div>
 
     <table class="table table-striped">

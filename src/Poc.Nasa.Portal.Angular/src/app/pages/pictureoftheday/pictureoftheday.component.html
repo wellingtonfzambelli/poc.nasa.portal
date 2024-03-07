@@ -1,0 +1,36 @@
+<div class="container-fluid">
+
+    <p>Picture of the day!</p>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
+        </div>
+
+        <input type="text" class="form-control" aria-label="Search" aria-describedby="inputGroup-sizing-default">
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <!-- <th>active</th> -->
+                <th>title</th>
+                <th>copyright</th>
+                <th>date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let picture of picturesOfTheDay | async">
+                <!-- <td><img src="assets/images/active.png" alt=""  width="20px" /></td> -->
+                <td>{{ picture.title }}</td>
+                <td>{{ picture.copyright }}</td>
+                <td>{{ picture.date }}</td>
+                <td>
+                    <a href="#" class="">Edit</a> - 
+                    <a href="#" class="">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+  </table>
+</div>

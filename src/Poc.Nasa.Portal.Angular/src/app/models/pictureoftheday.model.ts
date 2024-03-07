@@ -1,6 +1,6 @@
 export interface PictureOfTheDay{
     copyright: string;
-    date: Date;
+    date: string;
     explanation: string,
     hdurl: string,
     title: string,

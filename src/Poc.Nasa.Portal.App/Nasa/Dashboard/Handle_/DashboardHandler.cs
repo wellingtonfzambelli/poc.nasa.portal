@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Poc.Nasa.Portal.App.Shared;
+using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 
 namespace Poc.Nasa.Portal.App.Nasa.Dashboard;
@@ -28,6 +30,19 @@ public sealed class DashboardHandler : IRequestHandler<DashboardRequestHandlerDt
     {
         _logger.LogInformation("info DashboardHandler");
 
-        throw new NotImplementedException();
+        var response = new DashboardResponseHandlerDto();
+
+        if (await _unitOfWork.PictureOfTheDayRepository.GetAllAsync(cancellationToken)
+            is var picture && picture is null)
+        {
+            response.SetError(new ErrorResponse(
+                MessageValidation.NoDataFound.code,
+                MessageValidation.NoDataFound.description));
+
+            return response;
+        }
+
+        response.TotalRecordsPictureOfTheDay = picture.Count;
+        return response;
     }
 }

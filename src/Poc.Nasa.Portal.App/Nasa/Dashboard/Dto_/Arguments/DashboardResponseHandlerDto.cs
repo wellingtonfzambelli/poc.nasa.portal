@@ -4,4 +4,5 @@ namespace Poc.Nasa.Portal.App.Nasa.Dashboard;
 
 public sealed class DashboardResponseHandlerDto : BaseResponseDto
 {
+    public int TotalRecordsPictureOfTheDay { get; set; }
 }

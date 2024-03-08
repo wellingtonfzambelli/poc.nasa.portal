@@ -1,15 +1,15 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { PictureOfTheDay } from "../models/pictureoftheday.model";
 import { Observable } from "rxjs";
+import { Dashboard } from "../models/dashboard.model";
 import Utils from "../shared/utils";
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class PictureOfTheDayService{
+export class DashboardService{
     private _httpClient: HttpClient
     private _nasaApiBaseUrl = environment.nasaApiBaseURL;
 
@@ -27,9 +27,9 @@ export class PictureOfTheDayService{
         });
     }
 
-    GetPictures(): Observable<PictureOfTheDay[]> {
-        return this._httpClient.get<PictureOfTheDay[]>(
-            this._nasaApiBaseUrl + '/info', { headers: this.createHeader()}
+    GetDashboard(): Observable<Dashboard> {
+        return this._httpClient.get<Dashboard>(
+            this._nasaApiBaseUrl + '/dashboard', { headers: this.createHeader()}
         )
     }
 }

@@ -62,7 +62,6 @@ AddCommon(builder.Services);
 AddClient(builder.Services, _configuration);
 AddRabbitMQ(builder.Services, _configuration);
 AddRedis(builder, _configuration);
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // CORS
 string corsName = "corsapp";
@@ -115,7 +114,9 @@ static void AddCommon(IServiceCollection services)
     services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
     services.AddAutoMapper(typeof(ConfigurationMapping));
 
+    services.AddScoped<IUnitOfWork, UnitOfWork>();
     services.AddScoped<ICacheService, CacheService>();
+
     services.AddScoped<IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseHandlerDto>, GetPictureOfTheDayHandler>();
     services.AddScoped<IRequestHandler<GetAllPictureOfTheDayRequestHandlerDto, GetAllPictureOfTheDayResponseHandlerDto>, GetAllPictureOfTheDayHandler>();
     services.AddScoped<IRequestHandler<DashboardRequestHandlerDto, DashboardResponseHandlerDto>, DashboardHandler>();

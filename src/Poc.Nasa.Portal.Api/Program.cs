@@ -11,6 +11,7 @@ using Poc.Nasa.Portal.App.AutoMapper;
 using Poc.Nasa.Portal.App.HealthCheck;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetAllPictureOfTheDay;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
+using Poc.Nasa.Portal.App.Nasa.Dashboard;
 using Poc.Nasa.Portal.Infrastructure.Cache;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
@@ -19,7 +20,6 @@ using Poc.Nasa.Portal.Integration.NasaPortal;
 using Poc.Nasa.Portal.Integration.Shared.HttpClientBase;
 using Redis.OM;
 using Serilog;
-using Serilog.Events;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -58,12 +58,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddServiceCollection(builder.Configuration);
 
 // DI
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddScoped<ICacheService, CacheService>();
-builder.Services.AddScoped<IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseHandlerDto>, GetPictureOfTheDayHandler>();
-builder.Services.AddScoped<IRequestHandler<GetAllPictureOfTheDayRequestHandlerDto, GetAllPictureOfTheDayResponseHandlerDto>, GetAllPictureOfTheDayHandler>();
-builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetPictureOfTheDayValidator>());
-builder.Services.AddAutoMapper(typeof(ConfigurationMapping));
+AddCommon(builder.Services);
 AddClient(builder.Services, _configuration);
 AddRabbitMQ(builder.Services, _configuration);
 AddRedis(builder, _configuration);
@@ -113,6 +108,18 @@ app.UseHealthChecks("/nasa/v1/health/ready", new HealthCheckOptions()
     }
 });
 app.Run();
+
+static void AddCommon(IServiceCollection services)
+{
+    services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetPictureOfTheDayValidator>());
+    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+    services.AddAutoMapper(typeof(ConfigurationMapping));
+
+    services.AddScoped<ICacheService, CacheService>();
+    services.AddScoped<IRequestHandler<GetPictureOfTheDayRequestHandlerDto, GetPictureOfTheDayResponseHandlerDto>, GetPictureOfTheDayHandler>();
+    services.AddScoped<IRequestHandler<GetAllPictureOfTheDayRequestHandlerDto, GetAllPictureOfTheDayResponseHandlerDto>, GetAllPictureOfTheDayHandler>();
+    services.AddScoped<IRequestHandler<DashboardRequestHandlerDto, DashboardResponseHandlerDto>, DashboardHandler>();
+}
 
 static void AddClient(IServiceCollection services, IConfiguration config)
 {

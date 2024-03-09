@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 
 export class DashboardComponent implements OnInit {
-  public dashboard = new Observable<Dashboard>();
+  public dashboard = <Dashboard>{};
   private _dashboardService: DashboardService;
 
   constructor(dashboardService: DashboardService){
@@ -18,9 +18,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dashboard = this._dashboardService.GetDashboard();
-
-    // this._dashboardService.GetDashboard()
-    //   .subscribe(pictures => this.dashboard = pictures)
+    
+     this._dashboardService.GetDashboard()
+       .subscribe(data => {
+          this.dashboard = data;
+       });
   }
 }

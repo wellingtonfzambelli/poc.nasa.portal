@@ -22,22 +22,6 @@ export class PictureofthedayComponent implements OnInit {
     this.getPictureOfTheDay();
   }
 
-  // getPictureOfTheDay(){
-  //   this._pictureOfTheDayService.GetPictures()
-  //     .subscribe(pictures => this.picturesOfTheDay = pictures)
-  // }
-
-  // getPictureOfTheDays(){
-  //   this._pictureOfTheDayService.GetPictures().subscribe(data => {
-  //     const picutres = data;
-
-  //     picutres.map((item) => {
-  //       item.date = new Date(item.date!).toLocaleDateString('pt-BR');
-  //     })
-
-  //     this.picturesOfTheDay = picutres;
-  // });
-
   getPictureOfTheDay(){
     this.picturesOfTheDay = this._pictureOfTheDayService.GetPictures();
     this.pictureOfTheDayFilter = this.picturesOfTheDay;

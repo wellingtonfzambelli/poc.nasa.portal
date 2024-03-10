@@ -2,21 +2,20 @@
 
 # Thrid-party Nasa Api: https://api.nasa.gov/
 
+Swagger
+
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6d424ec3-abd1-4d1b-a975-3ddfa8c23987)
 
 Healhcheck
+
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/e8ea25f1-d495-43b9-821d-2f934bc0ecdd)
 
-	ok - mysql
-	ok - memory
-	ok - RabbitMQ
-	ok - Redis
-	ElasticSearch
 Docker
 	ok - Mysql
 	ok - Rabbit
 	ElasticSearch
-Swagger
-	ok	
+
+	
 Serilog
 	ok - mysql
 	ok - file

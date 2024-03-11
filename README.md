@@ -4,7 +4,6 @@ I'm using several stacks such as  mysql, serilog, automapper, mediatR and distri
 
 # Thrid-party Nasa Api: https://api.nasa.gov/
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/149cf38e-64fa-45c4-b933-1bc8563f8a73)
-![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/21de1dcf-2fbb-4ca3-8057-e617a53baf84)
 
 # Swagger
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6d424ec3-abd1-4d1b-a975-3ddfa8c23987)

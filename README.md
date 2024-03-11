@@ -1,4 +1,6 @@
 # poc.nasa.portal
+It's a P.O.C focos on showing some skills and stacks that I use work with. I'm using a king of "hexagonal architecture" idenpendently layers with its responsabilities.
+I'm using several stacks such as  mysql, serilog, automapper, mediatR and distribuited cache with Redis. I'm also using async process with RabbitMQ
 
 # Thrid-party Nasa Api: https://api.nasa.gov/
 

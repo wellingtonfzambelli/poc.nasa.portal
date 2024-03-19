@@ -56,19 +56,5 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 # SonarQube
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/013c1a74-ebf2-417e-bc6d-3794be7403ef)
 
-
-Angular
-	in progress
-Bootstrap
-
-
-ElasticSearch
-Kibana
-Identity
-BFF
-Api Gateway (Ocelot)
-
-
-Sonnar Cube
-Memcache
-Benchmark
+# Angular + Bootstrap
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/ec7d2043-246b-40cc-a4ac-5ea7fcc00793)

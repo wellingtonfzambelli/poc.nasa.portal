@@ -36,7 +36,7 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 
 # Docker
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/f82b1631-66b7-4483-9c9c-93265ab9b3e3)
-![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6d0cb7e0-75a5-4b01-bab3-7c78203d2645)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/a431f3dd-c95a-4ec4-aff4-0748383ae48f)
 	
 # Serilog
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/be55a4fc-6965-458e-aeac-f31faec0c4ee)
@@ -48,11 +48,14 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/4ae19d8f-8bcc-4c4a-b36b-c4039d2cab01)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6507504e-e252-4823-b12e-09c64671e707)
 
-
 # Unit Test
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/d84fdfc2-6cc4-4991-ad37-f37c4ddc1cea)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/552db50b-f62a-4901-b40c-e99038ddf568)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6e355707-9b48-4309-bbea-54dd35e9e8cf)
+
+# SonarQube
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/013c1a74-ebf2-417e-bc6d-3794be7403ef)
+
 
 Angular
 	in progress

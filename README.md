@@ -38,7 +38,7 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/f82b1631-66b7-4483-9c9c-93265ab9b3e3)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/a431f3dd-c95a-4ec4-aff4-0748383ae48f)
 	
-# Serilog
+# Serilog (logging file and database)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/be55a4fc-6965-458e-aeac-f31faec0c4ee)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6e9743e9-6c6e-4b5f-aeba-3aed630e50b3)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/45d88e15-2ea4-4be3-a2fb-81e9bd60aa4f)

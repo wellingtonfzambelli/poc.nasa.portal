@@ -32,7 +32,10 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/7c57cd54-bd9b-413e-b6bd-e550f06566ca)
 
 # Fluent Validation
-![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/163f6bc4-18c6-4f80-9862-357cc78b352f)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/488cc8dd-36b8-4af9-b1eb-31a263ad77f1)
+
+# Authentication with Bearer Token
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/8e9106ee-2b29-4c7f-8593-79dc2bf4f4f0)
 
 # Docker
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/f82b1631-66b7-4483-9c9c-93265ab9b3e3)

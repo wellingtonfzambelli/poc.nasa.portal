@@ -36,6 +36,7 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 
 # Authentication with Bearer Token
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/8e9106ee-2b29-4c7f-8593-79dc2bf4f4f0)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/e9d8e7f5-23c3-4724-b941-e95d875ab634)
 
 # Docker
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/f82b1631-66b7-4483-9c9c-93265ab9b3e3)

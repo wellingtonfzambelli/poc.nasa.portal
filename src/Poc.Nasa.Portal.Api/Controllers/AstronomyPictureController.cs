@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Poc.Nasa.Portal.Api.Controllers.Base;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetAllPictureOfTheDay;
@@ -9,6 +10,7 @@ using System.Net;
 
 namespace Poc.Nasa.Portal.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("nasa/v1")]
 public sealed class AstronomyPictureController : AstronomyBaseController

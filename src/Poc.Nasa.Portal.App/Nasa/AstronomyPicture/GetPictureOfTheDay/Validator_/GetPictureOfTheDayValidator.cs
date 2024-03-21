@@ -7,8 +7,9 @@ public sealed class GetPictureOfTheDayValidator : AbstractValidator<GetPictureOf
 {
     public GetPictureOfTheDayValidator() =>
         RuleFor(s => s.Date)
-            .Must(ValidateDateGreaterThan).WithErrorCode(MessageValidation.DateLessThan.code)
-                                          .WithMessage(MessageValidation.DateLessThan.description);
+            .Must(ValidateDateGreaterThan)
+            .WithErrorCode(MessageValidation.DateLessThan.code)
+            .WithMessage(MessageValidation.DateLessThan.description);
 
     private bool ValidateDateGreaterThan(DateTime date) =>
         date > DateTime.Parse("2020-01-01");

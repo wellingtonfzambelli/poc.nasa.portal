@@ -1,0 +1,11 @@
+†
+{C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\obj\Debug\net7.0\Poc.Nasa.Portal.Api.MvcApplicationPartsAssemblyInfo.csutf-8s
+hC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\obj\Debug\net7.0\Poc.Nasa.Portal.Api.AssemblyInfo.csutf-8~
+sC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\obj\Debug\net7.0\.NETCoreApp,Version=v7.0.AssemblyAttributes.csutf-8u
+jC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\obj\Debug\net7.0\Poc.Nasa.Portal.Api.GlobalUsings.g.csutf-8G
+>C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\Program.csutf-8W
+NC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\Filters\ExceptionFilter.csutf-8f
+]C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\Extensions\ServiceCollectionExtensions.csutf-8_
+VC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\Controllers\DashboardController.csutf-8h
+_C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\Controllers\Base\AstronomyBaseController.csutf-8f
+]C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\Controllers\AstronomyPictureController.csutf-8

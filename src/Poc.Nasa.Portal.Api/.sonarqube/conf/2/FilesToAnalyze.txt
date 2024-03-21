@@ -1,0 +1,16 @@
+﻿C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Cache\CacheService.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Cache\ICacheService.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Cache\Model\PictureOfTheDayRedis.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Configurations\GlobalParams.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Configurations\MessageValidation.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Configurations\NamedHttpClients.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Configurations\NasaPortalContext.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\DI\CommonServiceCollectionExtensions.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Domain\Models\PictureOfTheDayAggregate\PictureOfTheDayBuilder.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Domain\Models\PictureOfTheDayAggregate\PictureOfTheDayRepository.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\MessageBroker\ISetupMessageBroker.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\MessageBroker\Messages\PictureOfTheDayMsg.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\MessageBroker\SetupMessageBroker.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\Shared\RepositoryBase.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\UnitOfWork\IUnitOfWork.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Infrastructure\UnitOfWork\UnitOfWork.cs

@@ -1,0 +1,3 @@
+﻿C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Workers\Consumers\PictureOfTheDay\PictureOfTheDayConsumer.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Workers\Program.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Workers\Properties\launchSettings.json

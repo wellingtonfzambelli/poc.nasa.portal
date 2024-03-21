@@ -1,0 +1,5 @@
+﻿C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Domain\Models\PictureOfTheDayAggregate\IPictureOfTheDayRepository.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Domain\Models\PictureOfTheDayAggregate\PictureOfTheDay.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Domain\Models\Shared\BaseModel.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Domain\Models\Shared\IRepositoryBase.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Domain\Shared\Utils.cs

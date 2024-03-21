@@ -1,0 +1,7 @@
+﻿C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\Dto_\GetPictureOfTheDay_\GetPictureOfTheDayResponseClientDto.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\Dto_\NasaBadRequestClientDto.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\Dto_\NasaResponseBaseClientDto.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\INasaPortalClient.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\NasaPortalClient.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\Shared\HttpClientBase\BaseHttpClient.cs
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\Shared\HttpClientBase\IBaseHttpClient.cs

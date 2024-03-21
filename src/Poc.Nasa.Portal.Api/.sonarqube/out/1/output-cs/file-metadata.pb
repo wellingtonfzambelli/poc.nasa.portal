@@ -1,0 +1,11 @@
+É
+xC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\obj\Debug\net7.0\Poc.Nasa.Portal.Integration.AssemblyInfo.csutf-8Ü
+{C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\obj\Debug\net7.0\.NETCoreApp,Version=v7.0.AssemblyAttributes.csutf-8Ö
+zC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\obj\Debug\net7.0\Poc.Nasa.Portal.Integration.GlobalUsings.g.csutf-8m
+dC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\Shared\HttpClientBase\IBaseHttpClient.csutf-8l
+cC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\Shared\HttpClientBase\BaseHttpClient.csutf-8c
+ZC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\NasaPortalClient.csutf-8d
+[C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\INasaPortalClient.csutf-8q
+hC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\Dto_\NasaResponseBaseClientDto.csutf-8o
+fC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\Dto_\NasaBadRequestClientDto.csutf-8ê
+ÜC:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Integration\NasaPortal\Dto_\GetPictureOfTheDay_\GetPictureOfTheDayResponseClientDto.csutf-8

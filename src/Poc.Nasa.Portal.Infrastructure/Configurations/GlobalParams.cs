@@ -48,4 +48,8 @@ public static class GlobalParams
     // Consumer - PictureOfTheDay
     public static int WaitInMillisecondsConsumer(this IConfiguration configuration) =>
         configuration.GetValue<int?>("CONSUMER_WAIT_IN_MILLISECONDS") ?? throw new NullReferenceException();
+
+    // Cors
+    public static string CorsName(this IConfiguration configuration) =>
+        "corsapp";
 }

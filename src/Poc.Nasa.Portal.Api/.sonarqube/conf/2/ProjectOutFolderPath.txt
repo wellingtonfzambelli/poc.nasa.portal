@@ -1,0 +1,1 @@
+C:\Projetos\poc.nasa.portal\src\Poc.Nasa.Portal.Api\.sonarqube\out\2

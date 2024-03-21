@@ -6,7 +6,7 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/149cf38e-64fa-45c4-b933-1bc8563f8a73)
 
 # Swagger
-![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6d424ec3-abd1-4d1b-a975-3ddfa8c23987)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/674c38fc-2409-4f64-a9ff-4536a9820592)
 
 # Healhcheck
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/e8ea25f1-d495-43b9-821d-2f934bc0ecdd)

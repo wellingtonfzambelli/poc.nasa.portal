@@ -1,12 +1,12 @@
 # poc.nasa.portal
-It's a P.O.C focos on showing some skills and stacks that I use work with. I'm using a king of "hexagonal architecture" idenpendently layers with its responsabilities.
+It's a P.O.C focos on showing some skills and stacks that I use to work with. I'm using the archtecture besed on Clean Archtecture.
 In this project I'm integration with a NASA third-party Api. I'm using several stacks such as  mysql, serilog, automapper, mediatR and distribuited cache with Redis. I'm also using async process with RabbitMQ
 
 # Thrid-party Nasa Api: https://api.nasa.gov/
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/149cf38e-64fa-45c4-b933-1bc8563f8a73)
 
 # Swagger
-![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6d424ec3-abd1-4d1b-a975-3ddfa8c23987)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/674c38fc-2409-4f64-a9ff-4536a9820592)
 
 # Healhcheck
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/e8ea25f1-d495-43b9-821d-2f934bc0ecdd)
@@ -32,13 +32,17 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/7c57cd54-bd9b-413e-b6bd-e550f06566ca)
 
 # Fluent Validation
-![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/163f6bc4-18c6-4f80-9862-357cc78b352f)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/488cc8dd-36b8-4af9-b1eb-31a263ad77f1)
+
+# Authentication with Bearer Token
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/8e9106ee-2b29-4c7f-8593-79dc2bf4f4f0)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/e9d8e7f5-23c3-4724-b941-e95d875ab634)
 
 # Docker
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/f82b1631-66b7-4483-9c9c-93265ab9b3e3)
-![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6d0cb7e0-75a5-4b01-bab3-7c78203d2645)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/a431f3dd-c95a-4ec4-aff4-0748383ae48f)
 	
-# Serilog
+# Serilog (logging file and database)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/be55a4fc-6965-458e-aeac-f31faec0c4ee)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6e9743e9-6c6e-4b5f-aeba-3aed630e50b3)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/45d88e15-2ea4-4be3-a2fb-81e9bd60aa4f)
@@ -48,24 +52,13 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/4ae19d8f-8bcc-4c4a-b36b-c4039d2cab01)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6507504e-e252-4823-b12e-09c64671e707)
 
-
 # Unit Test
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/d84fdfc2-6cc4-4991-ad37-f37c4ddc1cea)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/552db50b-f62a-4901-b40c-e99038ddf568)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/6e355707-9b48-4309-bbea-54dd35e9e8cf)
 
-Angular
-	in progress
-Bootstrap
+# SonarQube
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/013c1a74-ebf2-417e-bc6d-3794be7403ef)
 
-
-ElasticSearch
-Kibana
-Identity
-BFF
-Api Gateway (Ocelot)
-
-
-Sonnar Cube
-Memcache
-Benchmark
+# Angular + Bootstrap
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/ec7d2043-246b-40cc-a4ac-5ea7fcc00793)

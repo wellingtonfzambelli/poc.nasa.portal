@@ -38,6 +38,13 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/8e9106ee-2b29-4c7f-8593-79dc2bf4f4f0)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/e9d8e7f5-23c3-4724-b941-e95d875ab634)
 
+# Identity
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/66f4ac67-e9c1-4629-82f5-fbcb4ac5e700)
+
+# Migrations
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/fbfdeaba-b106-4504-acb9-5e7fe256d09b)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/dac73d26-f11e-4aae-842f-b774b0b374be)
+
 # Docker
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/f82b1631-66b7-4483-9c9c-93265ab9b3e3)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/a431f3dd-c95a-4ec4-aff4-0748383ae48f)

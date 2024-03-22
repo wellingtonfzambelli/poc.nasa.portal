@@ -40,6 +40,8 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 
 # Identity
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/66f4ac67-e9c1-4629-82f5-fbcb4ac5e700)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/83384a3c-db7c-4331-93f9-e133c5dd24ba)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/12955503-c293-4124-b5a4-c1d24347adf2)
 
 # Migrations
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/fbfdeaba-b106-4504-acb9-5e7fe256d09b)

@@ -41,7 +41,7 @@ public sealed class SignupHandler : IRequestHandler<SignupRequestHandlerDto, Sig
 
         var identity = new IdentityUser
         {
-            UserName = request.RequestDto.Name,
+            UserName = request.RequestDto.Email,
             Email = request.RequestDto.Email,
             EmailConfirmed = true
         };

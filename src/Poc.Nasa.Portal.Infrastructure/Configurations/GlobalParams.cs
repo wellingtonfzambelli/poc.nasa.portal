@@ -11,8 +11,10 @@ public static class GlobalParams
         configuration.GetValue<string>("JWT_AUDIENCE") ?? throw new NullReferenceException();
     public static string JwtIssuer(this IConfiguration configuration) =>
         configuration.GetValue<string>("JWT_ISSUER") ?? throw new NullReferenceException();
-    public static int JwtExpiresInMinutes(this IConfiguration configuration) =>
-        configuration.GetValue<int?>("JWT_EXPIRES_IN_MINUTES") ?? throw new NullReferenceException();
+    public static int JwtAccessTokenExpiresInMinutes(this IConfiguration configuration) =>
+        configuration.GetValue<int?>("JWT_ACCESS_TOKEN_EXPIRES_IN_MINUTES") ?? throw new NullReferenceException();
+    public static int JwtRefreshTokenExpiresInMinutes(this IConfiguration configuration) =>
+        configuration.GetValue<int?>("JWT_REFRESH_TOKEN_EXPIRES_IN_MINUTES") ?? throw new NullReferenceException();
 
     // MySQL
     public static string ConnectionString(this IConfiguration configuration) =>

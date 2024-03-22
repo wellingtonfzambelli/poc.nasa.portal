@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Poc.Nasa.Portal.Api.Controllers.Base;
 using Poc.Nasa.Portal.App.Nasa.Authentication.Login;
+using Poc.Nasa.Portal.App.Nasa.Authentication.RefreshLogin;
 using Poc.Nasa.Portal.App.Nasa.Authentication.SignUp;
 using Poc.Nasa.Portal.App.Shared.Dt;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +20,7 @@ public sealed class AuthController : AstronomyBaseController
     [HttpPost]
     [Route("login")]
     [ProducesResponseType(typeof(BadRequestDto), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> AuthAsync
+    public async Task<IActionResult> LoginAsync
     (
         [FromBody] LoginRequestDto request,
         [FromHeader(Name = TrackId)][Required] Guid trackId,
@@ -27,6 +29,27 @@ public sealed class AuthController : AstronomyBaseController
     {
         var response = base.Mediator.Send(
             new LoginRequestHandlerDto(request, trackId),
+            ct);
+
+        if (response.Result.IsValid())
+            return Ok(response.Result);
+
+        return BadRequest(response.Result.GetErrors());
+    }
+
+    [Authorize]
+    [HttpPost]
+    [Route("refresh-login")]
+    [ProducesResponseType(typeof(BadRequestDto), (int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> RefreshLoginAsync
+   (
+       [FromBody] RefreshLoginRequestDto request,
+       [FromHeader(Name = TrackId)][Required] Guid trackId,
+       CancellationToken ct
+   )
+    {
+        var response = base.Mediator.Send(
+            new RefreshLoginRequestHandlerDto(request, trackId),
             ct);
 
         if (response.Result.IsValid())

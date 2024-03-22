@@ -27,10 +27,11 @@ builder.Host.ConfigureAppConfiguration((hostingContext, configurationBuilder) =>
 builder.Services.AddControllerConfiguration();
 builder.Services.AddDatabasesConfiguration(_configuration);
 builder.Services.AddIdentityConfiguration();
+builder.Services.AddAuthorizationPolicies();
+builder.Services.AddJwtConfiguration(_configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerConfiguration();
 builder.Services.AddDependencyInjectionConfiguration();
-builder.Services.AddJwtConfiguration(_configuration);
 builder.Services.AddClientConfiguration(_configuration);
 builder.Services.AddRabbitConfiguration(_configuration);
 builder.Services.AddRedisConfiguration(_configuration);

@@ -10,6 +10,12 @@ using System.Net;
 
 namespace Poc.Nasa.Portal.Api.Controllers;
 
+
+// AUTHORIZE EXAMPLES
+// [ClaimAuthorize(IdentityClaimTypes.Product, "Read");
+// [Authorize(Roles = IdentityRoles.Admin)]
+// [Authorize(Policy = IdentityPolicies.BusinessHour)]
+
 [Authorize]
 [ApiController]
 [Route("nasa/v1")]

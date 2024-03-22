@@ -9,7 +9,7 @@ using System.Net;
 
 namespace Poc.Nasa.Portal.Api.Controllers;
 
-[Authorize(Roles = "admin")]
+[Authorize]
 [ApiController]
 [Route("nasa/v1")]
 public sealed class DashboardController : AstronomyBaseController

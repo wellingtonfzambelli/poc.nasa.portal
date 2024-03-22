@@ -59,4 +59,17 @@ public static class AuthenticationConfig
         app.UseAuthentication();
         app.UseAuthorization();
     }
+
+    public static void AddAuthorizationPolicies(this IServiceCollection services)
+    {
+        // This is a example of policy rule
+        // You should add above the controller or method the follow annotation: [Authorize(Policies = "my_policy_name")]
+
+        //services.AddSingleton<IAuthorizationHandler, BusinessHourHandler>();
+        //services.AddAuthorization(options =>
+        //{
+        //    options.AddPolicy(Policies.BusinessHour, policy =>
+        //        policy.Requirements.Add(new BusinessHourRequirement()));
+        //});
+    }
 }

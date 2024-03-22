@@ -4,6 +4,7 @@ using Poc.Nasa.Portal.App.AutoMapper;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetAllPictureOfTheDay;
 using Poc.Nasa.Portal.App.Nasa.AstronomyPicture.GetPictureOfTheDay;
 using Poc.Nasa.Portal.App.Nasa.Authentication.Login;
+using Poc.Nasa.Portal.App.Nasa.Authentication.RefreshLogin;
 using Poc.Nasa.Portal.App.Nasa.Authentication.SignUp;
 using Poc.Nasa.Portal.App.Nasa.Dashboard;
 using Poc.Nasa.Portal.Infrastructure.Cache;
@@ -29,6 +30,7 @@ public static class DependencyInjectionConfig
         services.AddScoped<IRequestHandler<GetAllPictureOfTheDayRequestHandlerDto, GetAllPictureOfTheDayResponseHandlerDto>, GetAllPictureOfTheDayHandler>();
         services.AddScoped<IRequestHandler<DashboardRequestHandlerDto, DashboardResponseHandlerDto>, DashboardHandler>();
         services.AddScoped<IRequestHandler<LoginRequestHandlerDto, LoginResponseHandlerDto>, LoginHandler>();
+        services.AddScoped<IRequestHandler<RefreshLoginRequestHandlerDto, RefreshLoginResponseHandlerDto>, RefreshLoginHandler>();
         services.AddScoped<IRequestHandler<SignupRequestHandlerDto, SignupResponseHandlerDto>, SignupHandler>();
     }
 }

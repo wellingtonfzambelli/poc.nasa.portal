@@ -39,6 +39,15 @@ public sealed class SignupHandler : IRequestHandler<SignupRequestHandlerDto, Sig
             return response;
         }
 
+        response = await SignUpUserAsync(request);
+
+        return response;
+    }
+
+    private async Task<SignupResponseHandlerDto> SignUpUserAsync(SignupRequestHandlerDto request)
+    {
+        var response = new SignupResponseHandlerDto();
+
         var identity = new IdentityUser
         {
             UserName = request.RequestDto.Email,
@@ -53,11 +62,9 @@ public sealed class SignupHandler : IRequestHandler<SignupRequestHandlerDto, Sig
 
             response.SetError(
                 new ErrorResponse(
-                    MessageValidation.GeneralError.code,
-                    MessageValidation.GeneralError.description
+                    MessageValidation.AuthSignupFail.code,
+                    result.Errors.First().Description
                 ));
-
-            return response;
         }
 
         return response;

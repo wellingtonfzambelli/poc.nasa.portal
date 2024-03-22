@@ -19,4 +19,5 @@ public static class MessageValidation
     public static (string code, string description) AuthUserIsNowAllowed { get; } = ("NASA051", "This account does not have permition to login");
     public static (string code, string description) AuthUserRequiresTwoFactors { get; } = ("NASA052", "It is necessary to confirm in your the second factor");
     public static (string code, string description) AuthUserOrPasswordInvalid { get; } = ("NASA053", "E-mail or password invalid");
+    public static (string code, string description) AuthSignupFail { get; } = ("NASA054", string.Empty);
 }

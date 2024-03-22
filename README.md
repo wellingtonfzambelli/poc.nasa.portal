@@ -38,9 +38,9 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/8e9106ee-2b29-4c7f-8593-79dc2bf4f4f0)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/e9d8e7f5-23c3-4724-b941-e95d875ab634)
 
-# Identity
+# Identity + JWT + Refresh Token
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/66f4ac67-e9c1-4629-82f5-fbcb4ac5e700)
-![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/83384a3c-db7c-4331-93f9-e133c5dd24ba)
+![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/4dc861ef-1ed6-4813-9ff9-08993bf87e1e)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/12955503-c293-4124-b5a4-c1d24347adf2)
 
 # Migrations

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Poc.Nasa.Portal.Domain.Models.AuthenticationAggregate;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -15,13 +14,13 @@ public sealed class JWTService : IJWTService
     public JWTService(IConfiguration configuration) =>
         _configuration = configuration;
 
-    public string GenerateToken(User user)
+    public string GenerateToken(string email, string[] roles)
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, user.Email)
+            new Claim(ClaimTypes.Name, email)
         };
-        claims.AddRange(user.Roles.Select(p => new Claim(ClaimTypes.Role, p.Desscription)));
+        claims.AddRange(roles.Select(p => new Claim(ClaimTypes.Role, p)));
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {

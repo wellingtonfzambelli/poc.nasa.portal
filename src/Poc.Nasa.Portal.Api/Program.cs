@@ -1,5 +1,4 @@
 using Poc.Nasa.Portal.Api.Configuration;
-using Poc.Nasa.Portal.Api.Extensions;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
 using Serilog;
 
@@ -23,25 +22,23 @@ builder.Host.ConfigureAppConfiguration((hostingContext, configurationBuilder) =>
     _configuration = configurationBuilder.Build();
 });
 
-
 // ConfigureServices
 // Add services to the container.
 builder.Services.AddControllerConfiguration();
+builder.Services.AddDatabasesConfiguration(_configuration);
+builder.Services.AddIdentityConfiguration();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerConfiguration();
 builder.Services.AddDependencyInjectionConfiguration();
 builder.Services.AddJwtConfiguration(_configuration);
 builder.Services.AddClientConfiguration(_configuration);
 builder.Services.AddRabbitConfiguration(_configuration);
 builder.Services.AddRedisConfiguration(_configuration);
-builder.Services.AddMySqlConfiguration(_configuration);
 builder.Services.AddHealthCheckConfiguration(_configuration);
 builder.Services.AddCorsConfiguration(_configuration);
 builder.AddSerilogConfiguration(_path, _configuration);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddServiceCollection(builder.Configuration);
 var app = builder.Build();
-
-
 
 // Configure
 // Configure the HTTP request pipeline.

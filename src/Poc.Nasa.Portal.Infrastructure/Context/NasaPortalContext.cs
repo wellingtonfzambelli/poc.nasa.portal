@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Poc.Nasa.Portal.Domain.Models.PictureOfTheDayAggregate;
 using Poc.Nasa.Portal.Infrastructure.Domain.Models.PictureOfTheDayAggregate;
 
-namespace Poc.Nasa.Portal.Infrastructure.Configurations;
+namespace Poc.Nasa.Portal.Infrastructure.Context;
 
 public sealed class NasaPortalContext : DbContext
 {
@@ -12,7 +12,7 @@ public sealed class NasaPortalContext : DbContext
     public NasaPortalContext
     (
         DbContextOptions<NasaPortalContext> options,
-        ILoggerFactory loggerFactory = null
+        ILoggerFactory loggerFactory
     ) : base(options) =>
         _loggerFactory = loggerFactory;
 

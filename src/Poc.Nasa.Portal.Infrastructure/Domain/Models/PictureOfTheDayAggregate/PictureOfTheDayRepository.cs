@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Poc.Nasa.Portal.Domain.Models.PictureOfTheDayAggregate;
-using Poc.Nasa.Portal.Infrastructure.Configurations;
+using Poc.Nasa.Portal.Infrastructure.Context;
 using Poc.Nasa.Portal.Infrastructure.Shared;
 
 namespace Poc.Nasa.Portal.Infrastructure.Domain.Models.PictureOfTheDayAggregate;

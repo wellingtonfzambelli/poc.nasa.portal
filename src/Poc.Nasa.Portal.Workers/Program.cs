@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Poc.Nasa.Portal.Infrastructure.Cache;
 using Poc.Nasa.Portal.Infrastructure.Configurations;
+using Poc.Nasa.Portal.Infrastructure.Context;
 using Poc.Nasa.Portal.Infrastructure.MessageBroker;
 using Poc.Nasa.Portal.Infrastructure.UnitOfWork;
 using Poc.Nasa.Portal.Workers.Consumers.PictureOfTheDay;

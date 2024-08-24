@@ -9,6 +9,9 @@ public sealed class PictureOfTheDayRepository : RepositoryBase<PictureOfTheDay, 
 {
     public PictureOfTheDayRepository(NasaPortalContext _context) : base(_context) { }
 
+    public async Task<int> Count(CancellationToken ct) =>
+        2 + 2;
+
     public async Task<IList<PictureOfTheDay>> GetAllAsync(CancellationToken ct) =>
       await base.Context.PictureOfTheDay.OrderByDescending(s => s.PictureDate).ToListAsync(ct);
 

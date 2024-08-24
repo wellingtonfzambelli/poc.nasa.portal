@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.Nasa.Portal.Workers", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{DE339721-47B6-417A-882D-6AE12EF73087}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmark", "Benchmark", "{53BC0935-7C26-4A3C-8E56-F785360C89F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.Nasa.Portal.Benchmark", "..\Poc.Nasa.Portal.Benchmark\Poc.Nasa.Portal.Benchmark.csproj", "{835C6DEF-D636-4B48-B9CF-06F3DD50C376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,10 @@ Global
 		{4F26A38D-4FEC-47F2-AEB7-523D0C01459B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F26A38D-4FEC-47F2-AEB7-523D0C01459B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F26A38D-4FEC-47F2-AEB7-523D0C01459B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{835C6DEF-D636-4B48-B9CF-06F3DD50C376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{835C6DEF-D636-4B48-B9CF-06F3DD50C376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{835C6DEF-D636-4B48-B9CF-06F3DD50C376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{835C6DEF-D636-4B48-B9CF-06F3DD50C376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +83,7 @@ Global
 		{D8F3FD37-65F0-4226-BB6B-BD3851481865} = {F1FDEAD9-3A43-4ADA-9D4A-80DCDBC1AD58}
 		{4F26A38D-4FEC-47F2-AEB7-523D0C01459B} = {DE339721-47B6-417A-882D-6AE12EF73087}
 		{DE339721-47B6-417A-882D-6AE12EF73087} = {98DD5092-98AA-4CE3-8D06-79E738377CAA}
+		{835C6DEF-D636-4B48-B9CF-06F3DD50C376} = {53BC0935-7C26-4A3C-8E56-F785360C89F6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {157AA188-85ED-4F04-9438-08559CD8184B}

@@ -42,11 +42,11 @@ public sealed class AuthController : AstronomyBaseController
     [Route("refresh-login")]
     [ProducesResponseType(typeof(BadRequestDto), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> RefreshLoginAsync
-   (
+    (
        [FromBody] RefreshLoginRequestDto request,
        [FromHeader(Name = TrackId)][Required] Guid trackId,
        CancellationToken ct
-   )
+    )
     {
         var response = base.Mediator.Send(
             new RefreshLoginRequestHandlerDto(request, trackId),

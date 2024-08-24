@@ -19,6 +19,7 @@ public sealed class RabbitMQHealthCheck : IHealthCheck
         _connection = connection ?? throw new ArgumentNullException(nameof(connection));
         _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
     }
+
     public RabbitMQHealthCheck(IConnectionFactory factory, IConfiguration configuration)
     {
         _factory = factory ?? throw new ArgumentNullException(nameof(factory));
@@ -51,7 +52,6 @@ public sealed class RabbitMQHealthCheck : IHealthCheck
     }
 
     private void EnsureConnection()
-
     {
         if (_connection == null)
         {

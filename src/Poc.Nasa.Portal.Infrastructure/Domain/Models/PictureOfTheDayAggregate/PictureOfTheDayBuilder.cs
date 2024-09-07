@@ -22,7 +22,7 @@ public sealed class PictureOfTheDayBuilder
             .IsRequired();
 
         builder.Property(x => x.Explanation)
-            .HasColumnType("varchar(10000)")
+            .HasColumnType("text")
             .IsRequired();
 
         builder.Property(x => x.HdUrl)

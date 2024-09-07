@@ -34,6 +34,10 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 # Fluent Validation
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/488cc8dd-36b8-4af9-b1eb-31a263ad77f1)
 
+# Rate Limit Pattern
+![image](https://github.com/user-attachments/assets/264d290d-f698-4589-b6f0-fe0d99bed69d)
+![image](https://github.com/user-attachments/assets/ca150266-5a7b-43f9-9e4a-423768c568a3)
+
 # Authentication with Bearer Token
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/8e9106ee-2b29-4c7f-8593-79dc2bf4f4f0)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/e9d8e7f5-23c3-4724-b941-e95d875ab634)

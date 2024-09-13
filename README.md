@@ -51,9 +51,11 @@ In this project I'm integration with a NASA third-party Api. I'm using several s
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/fbfdeaba-b106-4504-acb9-5e7fe256d09b)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/dac73d26-f11e-4aae-842f-b774b0b374be)
 
-# Docker
+# Docker + Docker-compose
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/f82b1631-66b7-4483-9c9c-93265ab9b3e3)
-![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/a431f3dd-c95a-4ec4-aff4-0748383ae48f)
+![image](https://github.com/user-attachments/assets/01770999-5acc-4ef9-88c8-fce582effb1a)
+![image](https://github.com/user-attachments/assets/0bf6d2fa-27e5-49bb-9c47-1235a742ccbd)
+
 	
 # Serilog (logging file and database)
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/be55a4fc-6965-458e-aeac-f31faec0c4ee)

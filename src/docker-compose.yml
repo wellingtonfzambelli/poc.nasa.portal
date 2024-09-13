@@ -6,6 +6,12 @@ services:
     build:
       context: Poc.Nasa.Portal.Api
       dockerfile: Dockerfile
+    networks:
+      - nasa-networks
+    depends_on:
+      - poc.nasa.portal.rabbitmq
+      - poc.nasa.portal.redis
+      - poc.nasa.portal.mysql
 
   # RABBIT-MQ
   poc.nasa.portal.rabbitmq:

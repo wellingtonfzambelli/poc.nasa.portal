@@ -1,1 +1,0 @@
-﻿insert into pictureoftheday values ('b31d2c8c-bdab-4b1e-943f-dcd0e55cf667', 'Wang Letian', '2024-02-17', 'A cosmic dust grain plowing through the upper', 'https://apod.nasa.gov/apod/image/2402/MeteorBayofNaples_V2.jpg', 'Meteor over the Bay of Naples', 'https://apod.nasa.gov/apod/image/2402/MeteorBayofNaples_V2_1024.jpg')

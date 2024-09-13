@@ -1,0 +1,60 @@
+services:
+  # API
+  poc.nasa.portal.api:
+    image: ${DOCKER_REGISTRY-}pocnasaportalapi
+    container_name: nasa.api
+    build:
+      context: Poc.Nasa.Portal.Api
+      dockerfile: Dockerfile
+
+  # RABBIT-MQ
+  poc.nasa.portal.rabbitmq:
+    image: rabbitmq:3-management
+    container_name: nasa.rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - nasa-networks
+
+  # REDIS
+  poc.nasa.portal.redis:
+    image: redis:latest
+    container_name: nasa.redis
+    restart: always
+    ports:
+      - '6379:6379'
+    networks:
+      - nasa-networks
+
+  # MYSQL
+  poc.nasa.portal.mysql:
+    image: mysql:8.0
+    container_name: nasa.mysql
+    cap_add:
+      - SYS_NICE
+    restart: always
+    ports:
+      - 7000:3306
+    environment:
+      MYSQL_DATABASE: nasaportal
+      MYSQL_USER: my_database_username
+      MYSQL_PASSWORD: my_database_password
+      MYSQL_ROOT_PASSWORD: my_root_password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./Poc.Nasa.Portal.Api/Properties/Database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - nasa-networks
+
+volumes:
+  db_data:
+    driver: local
+  elasticsearch-data:
+    driver: local  
+
+networks:
+  nasa-networks:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_icc: "true"

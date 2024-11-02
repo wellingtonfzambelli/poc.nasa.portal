@@ -4,7 +4,7 @@ This project is a Proof of Concept (P.O.C.) designed to showcase the skills and 
 Key technologies utilized in this project include MySQL for data storage, Serilog for structured logging, AutoMapper for object mapping, MediatR for implementing the mediator pattern, and distributed caching with Redis. Additionally, the application leverages asynchronous processing with RabbitMQ to enhance performance and reliability.
 
 # Stacks of this project
-- .NET 8
+- .NET 7
 - Automapper
 - Entity Framework Core
 - Action Filter

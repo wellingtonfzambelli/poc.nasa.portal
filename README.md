@@ -26,6 +26,8 @@ Key technologies utilized in this project include MySQL for data storage, Serilo
 - Docker _(Docker Compose)_
 - Postman _(for API testing)_
 - Visual Studio 2022
+- api.nasa.gov Web Site _(for testing)_
+
 
 # Thrid-party Nasa Api: https://api.nasa.gov/
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/149cf38e-64fa-45c4-b933-1bc8563f8a73)

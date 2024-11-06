@@ -1,6 +1,33 @@
-# poc.nasa.portal
-It's a P.O.C focos on showing some skills and stacks that I use to work with. I'm using the archtecture besed on Clean Archtecture.
-In this project I'm integration with a NASA third-party Api. I'm using several stacks such as  mysql, serilog, automapper, mediatR and distribuited cache with Redis. I'm also using async process with RabbitMQ
+# About
+This project is a Proof of Concept (P.O.C.) designed to showcase the skills and technology stacks I use in my work. It employs a Clean Architecture approach to ensure maintainability and scalability. The application integrates with a third-party API from NASA, allowing for the exploration of space-related data.
+
+Key technologies utilized in this project include MySQL for data storage, Serilog for structured logging, AutoMapper for object mapping, MediatR for implementing the mediator pattern, and distributed caching with Redis. Additionally, the application leverages asynchronous processing with RabbitMQ to enhance performance and reliability.
+
+# Stacks of this project
+- .NET 7
+- Automapper
+- Entity Framework Core
+- Action Filter
+- Filter Validation
+- Serilog
+- Rate Limit
+- Bearer Token
+- Identity
+- Web Api
+- Swagger
+- HealthCheck
+- RabbitMQ
+- MediatR
+- Redis
+- XUnit
+- SonarQube
+- Angular 17
+- Bootstrap
+- Docker _(Docker Compose)_
+- Postman _(for API testing)_
+- Visual Studio 2022
+- api.nasa.gov Web Site _(for testing)_
+
 
 # Thrid-party Nasa Api: https://api.nasa.gov/
 ![image](https://github.com/wellingtonfzambelli/poc.nasa.portal/assets/41651018/149cf38e-64fa-45c4-b933-1bc8563f8a73)

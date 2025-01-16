@@ -13,7 +13,6 @@ public sealed class RabbitMQHealthCheck : IHealthCheck
     private readonly Uri _rabbitConnectionString;
     private readonly SslOption _sslOption;
 
-#pragma warning disable CS8618 // O campo não anulável precisa conter um valor não nulo ao sair do construtor. Considere declará-lo como anulável.
     public RabbitMQHealthCheck(IConnection connection, IConfiguration configuration)
     {
         _connection = connection ?? throw new ArgumentNullException(nameof(connection));
@@ -31,7 +30,6 @@ public sealed class RabbitMQHealthCheck : IHealthCheck
         _sslOption = ssl;
         _configuration = configuration;
     }
-#pragma warning restore CS8618 // O campo não anulável precisa conter um valor não nulo ao sair do construtor. Considere declará-lo como anulável.
 
     public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken ct = default)
     {

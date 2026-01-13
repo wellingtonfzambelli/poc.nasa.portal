@@ -25,7 +25,7 @@ Key technologies utilized in this project include MySQL for data storage, Serilo
 - Bootstrap
 - Docker _(Docker Compose)_
 - Postman _(for API testing)_
-- Visual Studio 2022
+- Visual Studio Community
 - api.nasa.gov Web Site _(for testing)_
 
 
